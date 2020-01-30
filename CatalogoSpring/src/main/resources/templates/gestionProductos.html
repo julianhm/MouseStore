@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns: th = "http://www.thymeleaf.org">
+<head>
+<title th:text= "${titulo}"></title>
+<meta charset="utf-8"/>
+
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" th:href="@{../../styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{../../plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{../../plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{../../plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{../../plugins/OwlCarousel2-2.2.1/animate.css}">
+<link th:href="@{../../plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{../../styles/main_styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{../../styles/responsive.css}">
+</head>
+
+<body>
+<div class="super_container">
+	
+	<!-- Header -->
+
+	<header class="header">
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a th:text="${tituloPrin}" th:href="@{/index}"></a></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a th:text="${inicioMenu}" th:href="@{/index}"></a></li>
+					<li><a th:text="${catalogoMenu}" th:href="@{/store}"></a></li>
+					<li><a th:text="${registroMenu}" th:href="@{/registro}"></a></li>
+					<li><a th:text="${carritoMenu}" th:href="@{/cart}"></a></li>
+					
+				</ul>
+			</nav>
+			<div class="header_content ml-auto">
+				<div class="search header_search">
+					<form action="#">
+						<input type="search" class="search_input" required="required">
+						<button type="submit" id="search_button" class="search_button"><img th:src="@{/images/magnifying-glass.svg}" alt=""></button>
+					</form>
+				</div>
+				<div class="shopping">
+					<!-- Cart -->
+					<a th:href="@{/cart}" >
+						<div class="cart">
+							<img th:src="@{/images/shopping-bag.svg}" alt="" >
+							<div class="cart_num_container" >
+								<div class="cart_num_inner"  >
+									<div class="cart_num"  th:text="${cantidadCarrito}" ></div>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<!-- Avatar -->
+					<a th:href="@{/registro}">
+						<div class="avatar">
+							<img th:src="@{/images/avatar.svg}" alt="" th:text= "${ingresar}">
+						</div>
+					</a>
+				</div>
+			</div>
+
+		
+	</header>
+
+	
+</div>	
+
+	<div class="home">
+		<div class="home_slider_background" data-parallax="scroll"
+			style="background-image:url(../../images/logoMouseStore.jpg)" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_container">
+						<div class="home_content"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div align="center">
+		<h1 th:text="${titulo}"></h1>
+		<form center th:action="@{/admin/product}" th:object="${producto}"
+			method="post">
+			<table>
+
+
+				<tr>
+					<td>Nombre :</td>
+					<td><input type="text" th:field="*{nombre}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<td><small class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small></td>
+				</tr>
+				<tr>
+					<td>Descripción :</td>
+					<td><textarea name="descripcion" th:field="*{descripcion}"
+							class="form-control"
+							placeholder="Comparte tu opinión con el autor!"></textarea></td>
+
+				</tr>
+				<tr>
+					<td>Precio Pesos:</td>
+					<td><input type="text" th:field="*{precioPesos}" 
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<td><small class="form-text text-danger"
+						th:if="${#fields.hasErrors('precioPesos')}"
+						th:errors="*{precioPesos}"></small></td>
+				</tr>
+				<tr>
+					<td>Precio dolar :</td>
+					<td><input type="text" th:field="*{precioDolar}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Peso :</td>
+					<td><input type="text" th:field="*{peso}" class="form-control"
+						th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Largo :</td>
+					<td><input type="text" th:field="*{largo}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Ancho :</td>
+					<td><input type="text" th:field="*{ancho}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Profundo :</td>
+					<td><input type="text" th:field="*{profundo}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+
+				<tr>
+					<td>Sube una Foto :</td>
+					<td><input type="file" name="fotoprim" th:field="*{foto1}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('foto1')}" th:errors="*{foto1}"></small>
+					<td color="red">*</td>
+				</tr>
+
+
+				<tr>
+
+					<td align = "center"><input type="submit" value="Crear Prducto" /></td>
+				</tr>
+				
+				<tr >
+				<td color="red"><small >Los campos (*) son obligatorios</small></td>
+				</tr>
+				
+			</table>
+
+			<!-- 	<input type="hidden" th:field="*{id}" />  -->
+			<!-- 	<input type="hidden" th:field="*{micarrito}" /> -->
+		</form>
+
+	</div>
+
+	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/styles/bootstrap4/popper.js}"></script>
+<script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+<script th:src="@{/plugins/easing/easing.js}"></script>
+<script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
+</body>
+</html>

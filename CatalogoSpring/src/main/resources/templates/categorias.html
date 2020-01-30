@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns: th = "http://www.thymeleaf.org">
+<head>
+<title th:text="${titulo}"></title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="styles/categories.css">
+<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+	
+<!-- Header -->
+
+	<header class="header">
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a th:text="${titulo}" th:href="@{/index}"></a></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a th:text="${inicioMenu}" th:href="@{/index}"></a></li>
+					<li><a th:text="${catalogoMenu}" th:href="@{/store}"></a></li>
+					<li><a th:text="${registroMenu}" th:href="@{/index}"></a></li>
+					<li><a th:text="${carritoMenu}" th:href="@{/cart}"></a></li>
+					
+				</ul>
+			</nav>
+			<div class="header_content ml-auto">
+				<div class="search header_search">
+					<form action="#">
+						<input type="search" class="search_input" required="required">
+						<button type="submit" id="search_button" class="search_button"><img th:src="@{/images/magnifying-glass.svg}" alt=""></button>
+					</form>
+				</div>
+				<div class="shopping">
+					<!-- Cart -->
+					<a th:href="@{/cart}" >
+						<div class="cart">
+							<img th:src="@{/images/shopping-bag.svg}" alt="" >
+							<div class="cart_num_container" >
+								<div class="cart_num_inner"  >
+									<div class="cart_num"  th:text="${cantidadCarrito}" ></div>
+								</div>
+							</div>
+						</div>
+					</a>
+					
+					<!-- Avatar -->
+					<a href="#">
+						<div class="avatar">
+							<img th:src="@{/images/avatar.svg}" alt="" th:text= "${ingresar}">
+							
+						</div>
+					</a>
+				</div>
+			</div>
+
+		
+	</header>
+
+	
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/Manillas 64Gb.jpeg" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_container">
+						<div class="home_content">
+							
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Products -->
+
+	<div class="products">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					
+					
+
+						<!-- Product -->
+						<div class="product">
+							<div class="product_image"><img src="images/mouseGamer.jpg" alt=""></div>
+							<div class="rating rating_5" data-rating="5">
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i>
+							</div>
+							<div class="product_content clearfix">
+								<div class="product_info">
+									<div class="product_name"><a th:href="@{/producto}">2 Piece Swimsuit</a></div>
+									<div class="product_price">$35.00</div>
+								</div>
+								<div class="product_options">
+									<div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
+									<div class="product_fav product_option">+</div>
+								</div>
+							</div>
+						</div>
+
+					
+	
+
+	
+	<!-- Footer -->
+
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="footer_logo"><a th:href="@{/index}" th:text="${tituloprinc}"></a></div>
+					<nav class="footer_nav">
+						<ul>
+							<li><a th:text="${inicioMenu}" th:href="@{/index}"></a></li>
+							<li><a th:text="${catalogoMenu}" th:href="@{/store}"></a></li>
+							<li><a th:text="${registroMenu}" th:href="@{/index}"></a></li>
+							<li><a th:text="${carritoMenu}" th:href="@{/cart}"></a></li>
+					
+						</ul>
+					</nav>
+					<div class="footer_social">
+						<ul>
+							<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
+<script src="plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.js"></script>
+<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="js/categories_custom.js"></script>
+</body>
+</html>

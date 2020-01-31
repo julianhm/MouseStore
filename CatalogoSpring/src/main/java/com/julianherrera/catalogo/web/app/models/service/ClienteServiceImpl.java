@@ -35,6 +35,21 @@ public class ClienteServiceImpl implements IClienteService{
 		// TODO Auto-generated method stub
 		return clienteDao.findById(id).orElse(null);
 	}
+	
+	@Transactional(readOnly=true)
+	@Override
+	public Cliente buscarPorCorreo(String correo) {
+		// TODO Auto-generated method stub
+		List<Cliente> misClientes= (List<Cliente>) clienteDao.findAll();
+		Cliente cliente = new Cliente();
+		for(int i=0; i<misClientes.size(); i++) {
+			if(misClientes.get(i).getCorreo().equals(correo)) {
+				cliente=misClientes.get(i);
+				break;
+			}
+		}
+		return cliente;
+	}
 
 	@Transactional
 	@Override

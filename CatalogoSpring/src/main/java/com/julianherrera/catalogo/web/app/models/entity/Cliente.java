@@ -1,8 +1,8 @@
 package com.julianherrera.catalogo.web.app.models.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,9 +26,6 @@ public class Cliente implements Serializable {
 	private Long id;
 	
 	
-	
-	
-
 	@NotEmpty
 	private String nombre;
 	
@@ -43,14 +40,13 @@ public class Cliente implements Serializable {
 	
 	
 	@NotEmpty
+	@Column(name="codigo_postal")
 	private String codPostal;
 	
 	private String telefono;
 	
 	@NotEmpty
 	private String celular;
-	
-	
 	
 
 	public Long getId() {

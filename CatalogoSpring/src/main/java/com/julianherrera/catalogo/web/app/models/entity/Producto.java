@@ -3,7 +3,7 @@ package com.julianherrera.catalogo.web.app.models.entity;
 
 import java.io.Serializable;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +24,7 @@ public class Producto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_producto")
 	public Long idProducto;
 	
 	@NotEmpty
@@ -33,8 +34,10 @@ public class Producto implements Serializable {
 	public String descripcion;
 	
 	@NotEmpty
+	@Column(name="precio_pesos")
 	public double precioPesos;
 	
+	@Column(name="precio_dolar")
 	public double precioDolar;
 	
 	public double peso;

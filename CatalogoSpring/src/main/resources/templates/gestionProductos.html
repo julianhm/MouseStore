@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html xmlns: th = "http://www.thymeleaf.org">
 <head>
-<title th:text= "${titulo}"></title>
-<meta charset="utf-8"/>
+<title th:text= "${'Mouse Store'}"></title>
+<meta charset="utf-8">
 
-<meta name="description" content="Wish shop project">
+<meta name="description" content="Proyecto Catalogo">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" th:href="@{../../styles/bootstrap4/bootstrap.min.css}">
-<link th:href="@{../../plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{../../plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
-<link rel="stylesheet" type="text/css" th:href="@{../../plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
-<link rel="stylesheet" type="text/css" th:href="@{../../plugins/OwlCarousel2-2.2.1/animate.css}">
-<link th:href="@{../../plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{../../styles/main_styles.css}">
-<link rel="stylesheet" type="text/css" th:href="@{../../styles/responsive.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
+<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/main_styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/responsive.css}">
 </head>
 
 <body>
@@ -23,23 +23,18 @@
 
 	<header class="header">
 		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
-			<div class="logo"><a th:text="${tituloPrin}" th:href="@{/index}"></a></div>
+			<div class="logo"><a th:text="${'Mouse Store'}" th:href="@{/index}"></a></div>
 			<nav class="main_nav">
 				<ul>
-					<li><a th:text="${inicioMenu}" th:href="@{/index}"></a></li>
-					<li><a th:text="${catalogoMenu}" th:href="@{/store}"></a></li>
-					<li><a th:text="${registroMenu}" th:href="@{/registro}"></a></li>
-					<li><a th:text="${carritoMenu}" th:href="@{/cart}"></a></li>
+					<li><a th:text="${'Inicio'}" th:href="@{/index}"></a></li>
+					<li><a th:text="${'Catalogo'}" th:href="@{/store}"></a></li>
+					<li><a th:text="${'Registro'}" th:href="@{/registro}"></a></li>
+					<li><a th:text="${'Carrito'}" th:href="@{/cart}"></a></li>
 					
 				</ul>
 			</nav>
 			<div class="header_content ml-auto">
-				<div class="search header_search">
-					<form action="#">
-						<input type="search" class="search_input" required="required">
-						<button type="submit" id="search_button" class="search_button"><img th:src="@{/images/magnifying-glass.svg}" alt=""></button>
-					</form>
-				</div>
+				
 				<div class="shopping">
 					<!-- Cart -->
 					<a th:href="@{/cart}" >
@@ -54,7 +49,7 @@
 					</a>
 					
 					<!-- Avatar -->
-					<a th:href="@{/registro}">
+					<a th:href="@{/login}">
 						<div class="avatar">
 							<img th:src="@{/images/avatar.svg}" alt="" th:text= "${ingresar}">
 						</div>
@@ -69,18 +64,88 @@
 </div>	
 
 	<div class="home">
-		<div class="home_slider_background" data-parallax="scroll"
-			style="background-image:url(../../images/logoMouseStore.jpg)" data-speed="0.8"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="home_container">
-						<div class="home_content"></div>
+
+		<!-- Home Slider -->
+
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background"
+						style="background-image: url(images/logoMouseStore.jpg)"></div>
+					<div class="home_slider_content">
+						<div class="home_slider_content_inner">
+							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
+							<div class="home_slider_title" th:text="${'Confianza y Calidad'}">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background"
+						style="background-image: url(images/logoMouseStoreGrisFONDO.jpg)"></div>
+					<div class="home_slider_content">
+						<div class="home_slider_content_inner">
+							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
+							<div class="home_slider_title" th:text="${'Confianza y Calidad'}"></div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background"
+						style="background-image: url(images/logoMouseStoreNegro.jpg)"></div>
+					<div class="home_slider_content">
+						<div class="home_slider_content_inner">
+							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
+							<div class="home_slider_title" th:text="${'Confianza y Calidad'}"></div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<!-- Home Slider Nav -->
+
+			<div
+				class="home_slider_next d-flex flex-column align-items-center justify-content-center">
+				<img src="images/arrow_r.png" alt="">
+			</div>
+
+			<!-- Home Slider Dots -->
+
+			<div class="home_slider_dots_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="home_slider_dots">
+								<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+									<li class="home_slider_custom_dot active">01.
+										<div></div>
+									</li>
+									<li class="home_slider_custom_dot">02.
+										<div></div>
+									</li>
+									<li class="home_slider_custom_dot">03.
+										<div></div>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+	
 
 	<div align="center">
 		<h1 th:text="${titulo}"></h1>
@@ -168,8 +233,37 @@
 		</form>
 
 	</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="footer_logo"><a th:href="@{/index}" th:text="${'Mouse Store'}"></a></div>
+					<nav class="footer_nav">
+						<ul>
+							<li><a th:text="${'Inicio'}" th:href="@{/index}"></a></li>
+							<li><a th:text="${'Catalogo'}" th:href="@{/store}"></a></li>
+							<li><a th:text="${'Registro'}" th:href="@{/registro}"></a></li>
+							<li><a th:text="${'Carrito'}" th:href="@{/cart}"></a></li>
+							
+						</ul>
+					</nav>
+					<div class="footer_social">
+						<ul>
+							
+							<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		</div>
+	</footer>
 
-	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/styles/bootstrap4/popper.js}"></script>
 <script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
 <script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>

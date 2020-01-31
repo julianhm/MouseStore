@@ -2,6 +2,7 @@ package com.julianherrera.catalogo.web.app.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,15 +22,18 @@ public class Pedido implements Serializable{
 	@NotEmpty
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_pedido")
 	public Long idPedido;
 	
 	@NotEmpty
+	@Column(name="mi_producto")
 	public Long miProducto;
 	
 	@NotEmpty
 	public int cantidad;
 	
 	@NotEmpty
+	@Column(name="id_cliente")
 	public Long idCliente;
 	
 	
@@ -58,6 +62,16 @@ public class Pedido implements Serializable{
 
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
+	}
+	
+	
+
+	public Long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public static long getSerialversionuid() {

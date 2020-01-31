@@ -1,5 +1,6 @@
 package com.julianherrera.catalogo.web.app.models.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,18 @@ public class PedidoServiceImpl implements IPedidoService{
 	
 	@Transactional(readOnly=true)
 	@Override
-	public List<Pedido> bucarPedido() {
+	public List<Pedido> buscarPedidoCliente(Long idCliente) {
 		// TODO Auto-generated method stub
-		return (List<Pedido>) pedidoDao.findAll();
+		List<Pedido> misPedidos = (List<Pedido>) pedidoDao.findAll();
+		List<Pedido> misPedidosCliente = new ArrayList<>();
+		
+		for(int i=0; i<misPedidos.size();i++) {
+			if(misPedidos.get(i).getIdCliente() == idCliente ) {
+				misPedidosCliente.add(misPedidos.get(i));
+			}
+		}
+		
+		return misPedidosCliente;
 	}
 
 	@Transactional
@@ -44,5 +54,7 @@ public class PedidoServiceImpl implements IPedidoService{
 		// TODO Auto-generated method stub
 		pedidoDao.deleteById(id);
 	}
+	
+	
 
 }

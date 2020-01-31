@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html xmlns: th="http://www.thymeleaf.org">
 <head>
-<title th:text="${titulo}"></title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Wish shop project">
+<title th:text= "${'Mouse Store'}"></title>
+<meta charset="utf-8"/>
+
+<meta name="description" content="Proyecto Catalogo">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
-<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-<link href="plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="styles/categories.css">
-<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
+<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
+<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/main_styles.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/styles/responsive.css}">
 </head>
 
 <body>
@@ -19,103 +21,221 @@
 		<!-- Header -->
 
 		<header class="header">
-			<div class="header_inner d-flex flex-row align-items-center justify-content-start">
-				<div class="logo">
-					<a th:text="${titulo}" th:href="@{/index}"></a>
-				</div>
-				<nav class="main_nav">
-					<ul>
-						<li><a th:text="${inicioMenu}" th:href="@{/index}"></a></li>
-						<li><a th:text="${catalogoMenu}" th:href="@{/store}"></a></li>
-						<li><a th:text="${registroMenu}" th:href="@{/index}"></a></li>
-						<li><a th:text="${carritoMenu}" th:href="@{/cart}"></a></li>
-
-					</ul>
-				</nav>
-				<div class="header_content ml-auto">
-					<div class="search header_search">
-						<form action="#">
-							<input type="search" class="search_input" required="required">
-							<button type="submit" id="search_button" class="search_button">
-								<img th:src="@{/images/magnifying-glass.svg}" alt="">
-							</button>
-						</form>
-					</div>
-					<div class="shopping">
-						<!-- Cart -->
-						<a th:href="@{/cart}">
-							<div class="cart">
-								<img th:src="@{/images/shopping-bag.svg}" alt="">
-								<div class="cart_num_container">
-									<div class="cart_num_inner">
-										<div class="cart_num" th:text="${cantidadCarrito}"></div>
-									</div>
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a th:text="${'Mouse Store'}" th:href="@{/index}"></a></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a th:text="${'Inicio'}" th:href="@{/index}"></a></li>
+					<li><a th:text="${'Catalogo'}" th:href="@{/store}"></a></li>
+					<li><a th:text="${'Registro'}" th:href="@{/registro}"></a></li>
+					<li><a th:text="${'Carrito'}" th:href="@{/cart}"></a></li>
+					
+				</ul>
+			</nav>
+			<div class="header_content ml-auto">
+				
+				<div class="shopping">
+					<!-- Cart -->
+					<a th:href="@{/cart}" >
+						<div class="cart">
+							<img th:src="@{/images/shopping-bag.svg}" alt="" >
+							<div class="cart_num_container" >
+								<div class="cart_num_inner"  >
+									<div class="cart_num"  th:text="${cantidadCarrito}" ></div>
 								</div>
 							</div>
-						</a>
-
-						<!-- Avatar -->
-						<a href="#">
-							<div class="avatar">
-								<img th:src="@{/images/avatar.svg}" alt="" th:text="${ingresar}">
-							</div>
-						</a>
-					</div>
+						</div>
+					</a>
+					
+					<!-- Avatar -->
+					<a th:href="@{/login}">
+						<div class="avatar">
+							<img th:src="@{/images/avatar.svg}" alt="" th:text= "${ingresar}">
+						</div>
+					</a>
 				</div>
-		</header>
+			</div>
+
+		
+	</header>
 			</div>	
 		<div class="home">
-		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/Manillas 64Gb.jpeg" data-speed="0.8"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="home_container">
-						<div class="home_content">
-							
-							
+
+		<!-- Home Slider -->
+
+		<div class="home_slider_container">
+			<div class="owl-carousel owl-theme home_slider">
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background"
+						style="background-image: url(images/logoMouseStore.jpg)"></div>
+					<div class="home_slider_content">
+						<div class="home_slider_content_inner">
+							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
+							<div class="home_slider_title" th:text="${'Confianza y Calidad'}">
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background"
+						style="background-image: url(images/logoMouseStoreGrisFONDO.jpg)"></div>
+					<div class="home_slider_content">
+						<div class="home_slider_content_inner">
+							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
+							<div class="home_slider_title" th:text="${'Confianza y Calidad'}"></div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Home Slider Item -->
+				<div class="owl-item">
+					<div class="home_slider_background"
+						style="background-image: url(images/logoMouseStoreNegro.jpg)"></div>
+					<div class="home_slider_content">
+						<div class="home_slider_content_inner">
+							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
+							<div class="home_slider_title" th:text="${'Confianza y Calidad'}"></div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<!-- Home Slider Nav -->
+
+			<div
+				class="home_slider_next d-flex flex-column align-items-center justify-content-center">
+				<img src="images/arrow_r.png" alt="">
+			</div>
+
+			<!-- Home Slider Dots -->
+
+			<div class="home_slider_dots_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="home_slider_dots">
+								<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
+									<li class="home_slider_custom_dot active">01.
+										<div></div>
+									</li>
+									<li class="home_slider_custom_dot">02.
+										<div></div>
+									</li>
+									<li class="home_slider_custom_dot">03.
+										<div></div>
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<div align="center">
-<h1 th:text="${titulo}"></h1>
-		 <form  center th:action="@{/form}" th:object="${cliente}" method="post">
-			<table>
+
+
+	
+	<!-- Contruccion del formulario de registro de Clientes nuevos -->
+	
+<div align="center" class="container">
+<h1  class= "text-primary " th:text="${titulo}"></h1>
+		 <form  center th:action="@{/registro}" th:object="${cliente}" method="post">
+			<table class="table table-bordered">
 
 
 				<tr>
-					<td>nombre :</td>
+					<td style = "width:200px;">Nombre :</td>
 					<td><input type="text" th:field="*{nombre}" class= "form-control" th:errorClass="'form-control alert-danger'"/></td>
 					<td><small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small></td>
 				</tr>
 				<tr>
-					<td>clave :</td>
-					<td><input type="text" th:field="*{clave}" class= "form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<td>Clave :</td>
+					<td><input type="password"  th:field="*{clave}" class= "form-control" th:errorClass="'form-control alert-danger'" /></td>
 					<td><small class="form-text text-danger" th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></small></td>
 				</tr>
-
+				
+				<tr></tr>
+				<tr>
+					<td>Correo :</td>
+					<td><input type="email" th:field="*{correo}" class= "form-control" th:errorClass="'form-control alert-danger'"/></td>
+					<td><small class="form-text text-danger" th:if="${#fields.hasErrors('correo')}" th:errors="*{correo}"></small></td>
+				</tr>
+				<tr>
+					<td>Direccion :</td>
+					<td><input type="text" th:field="*{direccion}" class= "form-control" th:errorClass="'form-control alert-danger'"/></td>
+					<td><small class="form-text text-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small></td>
+				</tr>
+				<tr>
+					<td>Código Postal :</td>
+					<td><input type="text" th:field="*{codPostal}" class= "form-control" th:errorClass="'form-control alert-danger'"/></td>
+					<td><small class="form-text text-danger" th:if="${#fields.hasErrors('codPostal')}" th:errors="*{codPostal}"></small></td>
+				</tr>
+				<tr>
+					<td>Teléfono Fijo :</td>
+					<td><input type="text" th:field="*{telefono}" class= "form-control" th:errorClass="'form-control alert-danger'"/></td>
+					
+				</tr>
+				<tr>
+					<td>Celular :</td>
+					<td><input type="text" th:field="*{celular}" class= "form-control" th:errorClass="'form-control alert-danger'"/></td>
+					<td><small class="form-text text-danger" th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}"></small></td>
+				</tr>
+				
+				
 				<tr>
 
-					<td><input type="submit" value="Crear Cliente" /></td>
+					<td><input type="submit" value="Crear Cliente" class="btn btn-primary" /></td>
 				</tr>
 			</table>
 
-		<!-- 	<input type="hidden" th:field="*{id}" />  -->
-		<!-- 	<input type="hidden" th:field="*{micarrito}" /> -->
+			<input type="hidden" th:field="*{id}" />  
+		
 		</form> 
 
  </div>
-      
-	<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.js"></script>
-<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="js/categories_custom.js"></script>
+     <footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col text-center">
+					<div class="footer_logo"><a th:href="@{/index}" th:text="${'Mouse Store'}"></a></div>
+					<nav class="footer_nav">
+						<ul>
+							<li><a th:text="${'Inicio'}" th:href="@{/index}"></a></li>
+							<li><a th:text="${'Catalogo'}" th:href="@{/store}"></a></li>
+							<li><a th:text="${'Registro'}" th:href="@{/registro}"></a></li>
+							<li><a th:text="${'Carrito'}" th:href="@{/cart}"></a></li>
+							
+						</ul>
+					</nav>
+					<div class="footer_social">
+						<ul>
+							
+							<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						</ul>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		</div>
+	</footer> 
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/styles/bootstrap4/popper.js}"></script>
+<script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
+<script th:src="@{/plugins/easing/easing.js}"></script>
+<script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
+<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
+<script th:src="@{/js/custom.js}"></script>
 </body>
 </html>

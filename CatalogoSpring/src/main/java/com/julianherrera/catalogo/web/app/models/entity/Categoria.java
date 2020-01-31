@@ -4,6 +4,7 @@ package com.julianherrera.catalogo.web.app.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Categoria implements Serializable{
 	@NotEmpty
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_categoria")
 	public Long idCategoria;
 	
 	@NotEmpty
@@ -32,11 +34,11 @@ public class Categoria implements Serializable{
 	@NotEmpty
 	public String nombre;
 	
-	
+	@Column(name="categoria_padre")
 	public Long categPadre;
 	
 	@Lob
-	public byte[] fotoCateg;
+	public byte[] foto;
 
 
 
@@ -81,12 +83,12 @@ public class Categoria implements Serializable{
 
 
 
-	public byte[] getFotoCateg() {
-		return fotoCateg;
+	public byte[] getFoto() {
+		return foto;
 	}
 
-	public void setFotoCateg(byte[] fotoCateg) {
-		this.fotoCateg = fotoCateg;
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 

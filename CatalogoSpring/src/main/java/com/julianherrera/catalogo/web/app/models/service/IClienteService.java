@@ -9,5 +9,6 @@ public interface IClienteService {
 	public void crear(Cliente cliente);
 	public Cliente buscar(Long id);
 	public void eliminar(Long id);
+	public Cliente buscarPorCorreo(String correo);
 	
 }

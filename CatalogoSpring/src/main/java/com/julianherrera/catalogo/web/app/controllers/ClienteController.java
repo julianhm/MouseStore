@@ -80,8 +80,6 @@ public class ClienteController {
 	public String GuardarCliente(@Validated Cliente cliente, BindingResult result, Model model, SessionStatus status) {
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Cliente");
-			
-		
 			return "registroCliente";
 		}
 		

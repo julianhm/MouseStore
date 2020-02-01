@@ -144,29 +144,29 @@
 	
 <div align="center">
 <h1 th:text="${titulo}"></h1>
-		 <form  center th:action="@{/login}"  method="get">
+		 <form th:action="@{/login}"  th:object="${cliente}" method="post">
 			<table>
 
 
 				<tr>
-					<td>nombre :</td>
-					<td><input type="text"  class= "form-control" /></td>
+					<td>Correo :</td>
+					<td><input type="text"  class= "form-control"  th:field="*{correo}"  /></td>
 					
 				</tr>
 				<tr>
-					<td>clave :</td>
-					<td><input type="password"  class= "form-control"/></td>
+					<td>Clave :</td>
+					<td><input type="password"  class= "form-control"   th:field="*{clave}" /></td>
 					
 				</tr>
 
 				<tr>
 
-					<td><input type="submit" value="Crear Cliente" /></td>
+					<td><input type="submit" value="INGRESAR" /></td>
 				</tr>
 			</table>
 
-		<!-- 	<input type="hidden" th:field="*{id}" />  -->
-		<!-- 	<input type="hidden" th:field="*{micarrito}" /> -->
+		 	
+		
 		</form> 
 
  </div>

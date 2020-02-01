@@ -1,5 +1,7 @@
 package com.julianherrera.catalogo.web.app.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +37,18 @@ public class ClienteController {
 	public IPedidoService pedidoService;
 	
 	
+	/**
+	 * **************************************************************************************
+	 * GESTION DE CLIENTES  Y PRODUCTOS DESDE ADMIN
+	 * **************************************************************************************
+	 */
+	
+	
 	//Metodo que me permito buscar todos los Clientee y enviarlo a la vista cliente
 	@RequestMapping(value = "/cliente",method = RequestMethod.GET)
-	public String buscarCliente(Model model) {
+	public String buscarClientes(Model model) {
 		
-		
+		model.addAttribute("ingresar", "  Ingresar");
 		model.addAttribute("titulo", "Cliente");
 		model.addAttribute("cliente",clienteService.bucarCliente());
 		
@@ -47,20 +56,142 @@ public class ClienteController {
 		
 	}
 	
+	@RequestMapping(value="/eliminarcliente/{id}")
+	public String eliminarCliente(@PathVariable(value="id") Long id) {
+	
+		if(id>0) {
+			clienteService.eliminar(id);
+		}
+		
+		return "redirect:/cliente";
+	}
+	
+
+	//Metodo que permite ir a la pagina para crear un nuevo producto
+	@RequestMapping(value="/product")
+	public String crearProducto(Model model) {
+		
+		Producto producto = new Producto();
+		model.addAttribute("producto",producto);
+		model.addAttribute("titulo", "Formulario de Productos");
+
+		model.addAttribute("cantidadCarrito", 0);
+		model.addAttribute("tituloPrin", "Productos");
+		model.addAttribute("ingresar", "  Administrador");
+		
+		
+		return "gestionProductos";
+
+	}
+	
+	//Este metodo recibe el producto creado en la vista y lo envia a la base de datos
+		@RequestMapping(value="/product", method = RequestMethod.POST)
+		public String GuardarProducto(@Validated Producto producto, BindingResult result, Model model, SessionStatus status) {
+			if(result.hasErrors()) {
+				productoService.crear(producto);
+				model.addAttribute("titulo", "Formulario de Productos");
+				
+				model.addAttribute("cantidadCarrito", 0);
+				model.addAttribute("tituloPrin", "Productos");
+				model.addAttribute("ingresar", "  Administrador");
+				
+				return "gestionProductos";
+			}
+			
+			
+			productoService.crear(producto);
+			status.setComplete();
+			
+			
+			return "redirect:/gestionProductos";
+			
+			
+		}
+		
+		//Este método recibe el ID por url y lo envia a la pagina editar
+		@RequestMapping(value="/editarproductos/{id}")
+		public String editarProducto(@PathVariable(value="id") Long id, Map<String,Object> model) {
+			
+			Producto producto = null;
+			
+			if(id>0) {
+				producto = productoService.buscar(id);
+			}else {
+				return "redirect:/gestionProductos";
+			}
+			
+			model.put("producto", producto);
+			model.put("titulo", "Editar Producto");
+			
+			return "gestionProductos";
+		}
+		
+		
+		
+		//	//Este método recibe el ID por url y lo envia a la pagina eliminar
+		@RequestMapping(value="/eliminarproducto/{id}")
+		public String eliminarProducto(@PathVariable(value="id") Long id) {
+		
+			if(id>0) {
+				productoService.eliminar(id);
+			}
+			
+			return "redirect:/gestionProductos";
+		}
+
+	
+	
+	/**
+	 * *************************************************************************************
+	 * GESTION DE LOGUEO 
+	 * *************************************************************************************
+	 */
+	
 	
 	//Metodo que recibe de la vista el usuario y la clave y se Busca en la base de datos
 	@RequestMapping(value = "/login")
-	public String buscar(Model model) {
+	public String login(Map<String,Object> model) {
 				
-				
-					model.addAttribute("titulo", "Cliente");
+		Cliente cliente= new Cliente();
+		
+		model.put("cliente", cliente);
+		
+		model.put("titulo", "Cliente");
+		model.put("ingresar", "  Ingresar");
 					
-					
-					return "login";
+		return "login";
 		
 		
 		
 	}
+	
+	
+	//Metodo que recibe de la vista el usuario y la clave y se Busca en la base de datos
+		@RequestMapping(value = "/login", method= RequestMethod.POST)
+		public String buscarClienteCorreo(Cliente cliente, Model model) {
+			
+			if(cliente.getCorreo().equals("admin@admin.com")&&cliente.getClave().equals("admin123")) {
+				return "redirect:/cliente";
+			}
+			
+			Cliente miCliente= clienteService.buscarPorCorreo(cliente.getCorreo())	;
+			
+			if(cliente.getCorreo().equals(miCliente.getCorreo()) && cliente.getClave().equals(miCliente.getClave()) ) {
+				cliente=miCliente;
+				return "redirect:/index/"+cliente.getId();
+			}
+				return "redirect:/index";
+			
+				
+			
+			
+		}
+		
+		/**
+		 * ***********************************************************************************
+		 * Gestion de Registro de un nuevo cliente
+		 * **********************************************************************************
+		 */
 
 	//Envio a la pagina de registro, se crea una instancia de cliente y se envia
 	@RequestMapping(value="/registro")
@@ -93,37 +224,52 @@ public class ClienteController {
 		
 	}
 	
-	@RequestMapping(value="/registroCliente/{id}")
-	public String editarCliente(@PathVariable(value="id") Long id, Map<String,Object> model) {
-		
-		Cliente cliente = null;
-		
-		if(id>0) {
-			cliente = clienteService.buscar(id);
-		}else {
-			return "redirect:/cliente";
-		}
-		
-		model.put("cliente", cliente);
-		model.put("titulo", "Editar Clinete");
-		
-		return "gestionProductos";
-	}
 	
-	@RequestMapping(value="/eliminarcliente/{id}")
-	public String eliminarCliente(@PathVariable(value="id") Long id) {
+	/**
+	 * ***********************************************************************************
+	 * GESTION DE PAGINA DE INICIO
+	 * ***********************************************************************************
+	 */
 	
-		if(id>0) {
-			clienteService.eliminar(id);
+	
+	
+	
+	//Metodo de la pagina principal
+		@RequestMapping({"/index/{id}"})
+		public String indexDos(@PathVariable(value="id") Long id, Model model) {
+			
+			
+			model.addAttribute("lema", "Confianza y Calidad");
+			model.addAttribute("loMejor", "Los mejores Precios de Armenia");
+			model.addAttribute("ultimo", "Ultimos Productos");
+			model.addAttribute("boton", "Catalogo");
+			model.addAttribute("descuentouno", "30% menos");
+			model.addAttribute("textouno", "En Diademas");
+			model.addAttribute("comprar", "Comprar Ahora");
+			model.addAttribute("descuentodos", "25% menos");
+			model.addAttribute("textodos", "En Mini Teclados");
+			model.addAttribute("descuentotres", "20% menos");
+			model.addAttribute("textotres", "En Todos los Mouse");
+			
+			if(id==null) {
+				model.addAttribute("ingresar", "  Ingresar");
+				model.addAttribute("cantidadCarrito", 0);
+			}else {
+				
+				model.addAttribute("cantidadCarrito", pedidoService.buscarPedidoCliente(id).size() );
+				model.addAttribute("ingresar",clienteService.buscar(id).getNombre() );
+			}
+			
+			
+			return "index";
+			
 		}
-		
-		return "redirect:/cliente";
-	}
+	
 	
 	
 	//Metodo de la pagina principal
 	@RequestMapping({"/index","/","","/home"})
-	public String index(@Validated Cliente cliente, BindingResult result, Model model, SessionStatus status) {
+	public String index( Model model) {
 		
 		
 		model.addAttribute("lema", "Confianza y Calidad");
@@ -138,13 +284,10 @@ public class ClienteController {
 		model.addAttribute("descuentotres", "20% menos");
 		model.addAttribute("textotres", "En Todos los Mouse");
 		
-		if(cliente.getId()==null) {
+		
 			model.addAttribute("ingresar", "  Ingresar");
 			model.addAttribute("cantidadCarrito", 0);
-		}else {
-			model.addAttribute("ingresar", cliente.getNombre());
-			model.addAttribute("cantidadCarrito",pedidoService.buscarPedidoCliente(cliente.getId()).size());
-		}
+		
 		
 		
 		return "index";
@@ -152,130 +295,62 @@ public class ClienteController {
 	}
 	
 	
+	/**
+	 * **********************************************************************************
+	 * GESTION DE CARRITO
+	 * *********************************************************************************
+	 */
+	
 	//metodo que envia al usuario a su carrito
 	@RequestMapping(value="/cart", method= RequestMethod.GET)
 	public String carrito(Model model) {
 	
+		model.addAttribute("ingresar", "  Ingresar");
+		model.addAttribute("cantidadCarrito", 0);
+		
 		return "carrito";
 		
 	}
 	
+	//metodo que retorna una lista de productos
+		@RequestMapping(value = "/listarProductos",method = RequestMethod.GET)
+		public String buscarProducto(Model model) {
+			
+			model.addAttribute("tituloprinc", "MOUSE STORE");
+			model.addAttribute("cantidadCarrito", 0);
+			model.addAttribute("titulo", "Cliente");
+			model.addAttribute("ingresar", "  Ingresar");
+			model.addAttribute("producto",productoService.bucarProducto());
+			
+			return "gestionProductos";
+			
+		}
+	
+	
+	
+	/**
+	 * **********************************************************************************
+	 * GESTION PAGINA CATALOGO
+	 * *********************************************************************************
+	 */
 	
 	//metodo que envia al usuario al catalogo de la tienda
 	@RequestMapping(value="/store", method= RequestMethod.GET)
 	public String catalogo(Model model) {
-		model.addAttribute("tituloprinc", "MOUSE STORE");
-		model.addAttribute("titulo","Catálogo");
-		model.addAttribute("inicioMenu", "INICIO");
-		model.addAttribute("catalogoMenu", "CATALOGO");
-		model.addAttribute("registroMenu", "REGISTRO");
-		model.addAttribute("carritoMenu", "CARRITO");
-		model.addAttribute("cantidadCarrito", 1);
+		
+		model.addAttribute("cantidadCarrito", 0);
 		model.addAttribute("ingresar", "Ingresar");
 		model.addAttribute("productos",productoService.bucarProducto());
 		
 		
-		return "categorias";
+		return "store";
 		
 	}
 	
-	//metodo que retorna una lista de productos
-	@RequestMapping(value = "/listarProductos",method = RequestMethod.GET)
-	public String buscarProducto(Model model) {
-		
-		model.addAttribute("tituloprinc", "MOUSE STORE");
-		
-		model.addAttribute("inicioMenu", "INICIO");
-		model.addAttribute("catalogoMenu", "CATALOGO");
-		model.addAttribute("registroMenu", "REGISTRO");
-		model.addAttribute("carritoMenu", "CARRITO");
-		model.addAttribute("cantidadCarrito", 1);
-		model.addAttribute("titulo", "Cliente");
-		model.addAttribute("ingresar", "  Ingresar");
-		model.addAttribute("producto",productoService.bucarProducto());
-		
-		return "gestionProductos";
-		
-	}
+	
+	
+	
 
-	//Metodo que permite ir a la pagina para crear un nuevo producto
-	@RequestMapping(value="/product")
-	public String crearProducto(Model model) {
-		
-		Producto producto = new Producto();
-		model.addAttribute("producto",producto);
-		model.addAttribute("titulo", "Formulario de Productos");
-		model.addAttribute("inicioMenu", "INICIO");
-		model.addAttribute("catalogoMenu", "CATALOGO");
-		model.addAttribute("registroMenu", "REGISTRO");
-		model.addAttribute("carritoMenu", "CARRITO");
-		model.addAttribute("cantidadCarrito", 1);
-		model.addAttribute("tituloPrin", "Productos");
-		model.addAttribute("ingresar", "  Ingresar");
-		
-		
-		return "gestionProductos";
-
-	}
 	
 	
-	//Este metodo recibe el producto creado en la vista y lo envia a la base de datos
-	@RequestMapping(value="/product", method = RequestMethod.POST)
-	public String GuardarProducto(@Validated Producto producto, BindingResult result, Model model, SessionStatus status) {
-		if(result.hasErrors()) {
-			Producto producto1 = new Producto();
-			model.addAttribute("producto",producto1);
-			model.addAttribute("titulo", "Formulario de Productos");
-			model.addAttribute("inicioMenu", "INICIO");
-			model.addAttribute("catalogoMenu", "CATALOGO");
-			model.addAttribute("registroMenu", "REGISTRO");
-			model.addAttribute("carritoMenu", "CARRITO");
-			model.addAttribute("cantidadCarrito", 1);
-			model.addAttribute("tituloPrin", "Productos");
-			model.addAttribute("ingresar", "  Ingresar");
-			
-			return "gestionProductos";
-		}
-		
-		
-		productoService.crear(producto);
-		status.setComplete();
-		
-		
-		return "redirect:/gestionProductos";
-		
-		
-	}
-	
-	//Este método recibe el ID por url y lo envia a la pagina editar
-	@RequestMapping(value="/editarproductos/{id}")
-	public String editarProducto(@PathVariable(value="id") Long id, Map<String,Object> model) {
-		
-		Producto producto = null;
-		
-		if(id>0) {
-			producto = productoService.buscar(id);
-		}else {
-			return "redirect:/gestionProductos";
-		}
-		
-		model.put("producto", producto);
-		model.put("titulo", "Editar Producto");
-		
-		return "gestionProductos";
-	}
-	
-	
-	
-	//	//Este método recibe el ID por url y lo envia a la pagina eliminar
-	@RequestMapping(value="/eliminarproducto/{id}")
-	public String eliminarProducto(@PathVariable(value="id") Long id) {
-	
-		if(id>0) {
-			productoService.eliminar(id);
-		}
-		
-		return "redirect:/gestionProductos";
-	}
-
 }

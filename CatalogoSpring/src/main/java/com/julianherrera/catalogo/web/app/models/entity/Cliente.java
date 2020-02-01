@@ -12,10 +12,13 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.context.annotation.SessionScope;
+
 
 
 @Entity
 @Table(name = "clientes")
+@SessionScope
 public class Cliente implements Serializable {
 
 	/**

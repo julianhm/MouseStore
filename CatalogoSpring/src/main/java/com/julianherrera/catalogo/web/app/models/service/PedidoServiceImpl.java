@@ -24,13 +24,13 @@ public class PedidoServiceImpl implements IPedidoService{
 		// TODO Auto-generated method stub
 		List<Pedido> misPedidos = (List<Pedido>) pedidoDao.findAll();
 		List<Pedido> misPedidosCliente = new ArrayList<>();
-		
+		/**
 		for(int i=0; i<misPedidos.size();i++) {
-			if(misPedidos.get(i).getIdCliente() == idCliente ) {
+			if(misPedidos.get(i).getCliente().getId() == idCliente ) {
 				misPedidosCliente.add(misPedidos.get(i));
 			}
 		}
-		
+		*/
 		return misPedidosCliente;
 	}
 

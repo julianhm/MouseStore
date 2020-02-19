@@ -1,12 +1,17 @@
 package com.julianherrera.catalogo.web.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -55,6 +60,16 @@ public class Cliente implements Serializable {
 	@NotEmpty
 	private String celular;
 	
+	
+	@OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Pedido> pedidos;
+	
+	
+	
+
+	public Cliente() {
+		pedidos= new ArrayList<Pedido>();
+	}
 
 	public Long getId() {
 		return id;
@@ -122,7 +137,19 @@ public class Cliente implements Serializable {
 		this.celular = celular;
 	}
 
+/**
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
 
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
+	public void addPedido(Pedido pedido) {
+		pedidos.add(pedido);
+	}
+*/
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

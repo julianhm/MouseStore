@@ -2,19 +2,25 @@ package com.julianherrera.catalogo.web.app.models.entity;
 
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 
 @Entity
-@Table(name = "producto")
+@Table(name = "productos")
 public class Producto implements Serializable {
 
 	/**
@@ -49,16 +55,12 @@ public class Producto implements Serializable {
 	
 	public double profundo;
 	
-	@NotEmpty
-	@Lob
-	public byte[] foto1;
-	
-	@Lob
-	public byte[] foto2;
-	
-	
-	@Lob
-	public byte[] foto3;
+	/**
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinTable(name="categorias_productos", 
+	joinColumns = @JoinColumn(name="categoria_id"),
+	inverseJoinColumns = @JoinColumn(name="producto_id"))*/
+	//public List<Categoria> categorias;
 	
 	
 
@@ -137,30 +139,22 @@ public class Producto implements Serializable {
 
 	
 	
-	public byte[] getFoto1() {
-		return foto1;
+	
+
+
+/**
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
 
-	public void setFoto1(byte[] foto1) {
-		this.foto1 = foto1;
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
-
-	public byte[] getFoto2() {
-		return foto2;
+	
+	public void addCategoria(Categoria categoria) {
+		categorias.add(categoria);
 	}
-
-	public void setFoto2(byte[] foto2) {
-		this.foto2 = foto2;
-	}
-
-	public byte[] getFoto3() {
-		return foto3;
-	}
-
-	public void setFoto3(byte[] foto3) {
-		this.foto3 = foto3;
-	}
-
+*/
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

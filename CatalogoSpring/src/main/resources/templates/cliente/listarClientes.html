@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thimeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<!------------------------- Header ---------------------------------->
+
+	<header th:replace= "layout/layout :: header" >
+	
+	</header>
+
+	
+<!------------------------ CLIENTE ------------------------------------>
+
+<div class="super_container"  style='float: center;margin:10px; padding: 80px; text-align: left;'>	
+
+	<!-- FORMULARIO PARA GESTIONAR CLIENTES -->	
+		
+	
+
+<!-- Creacion de tabla clientes -->
+<div class="container" align="center">
+<h1 class= "text-primary " th:text="${'LISTADO DE CLIENTES'}"></h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Identificador Cliente</th>
+				<th>Nombre</th>
+				<th>Correo</th>
+				<th>Direccion</th>
+				<th>Codigo Postal</th>
+				<th>Telefono</th>
+				<th>Celular</th>
+				<th>Eliminar</th>
+				
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item:${cliente}">
+				<td th:text="${item.id}"></td>
+				<td th:text="${item.nombre}"></td>
+				<td th:text="${item.correo}"></td>
+				<td th:text="${item.direccion}"></td>
+				<td th:text="${item.codPostal}"></td>
+				<td th:text="${item.telefono}"></td>
+				<td th:text="${item.celular}"></td>
+				
+				
+				<td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${item.id}" onclick="return confirm('esta seguro?');">Eliminar</a></td>
+
+
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+</div>
+<!------------------------ FOOTER ------------------------------------>
+
+	<footer th:replace="layout/layout :: footer">
+		
+	</footer>
+
+</html>

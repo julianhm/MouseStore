@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns: th = "http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<!------------------------- Header ---------------------------------->
+
+	<header th:replace= "layout/layout :: header" >
+	
+	</header>
+
+	
+<!------------------------ PRDUCTOS ------------------------------------>
+
+<div class="super_container"  style='float: center;margin:10px; padding: 80px; text-align: left;'>	
+
+
+	
+
+	<div align="center">
+		<h1 th:text="${titulo}"></h1>
+		<form center th:action="@{/product}" th:object="${producto}"
+			method="post">
+			<table>
+<tr>
+					<td>Categoria Padre :</td>
+					<td><select name="combo">
+							<!-- Opciones de la lista -->
+							<option value="1" selected>Opción 1</option>
+							<option value="2">Opción 2</option>
+							<option value="3">Opción 3</option>
+					</select></td>
+
+
+				</tr>
+
+				<tr>
+					<td>Nombre :</td>
+					<td><input type="text" th:field="*{nombre}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<td><small class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small></td>
+				</tr>
+				<tr>
+					<td>Descripción :</td>
+					<td><textarea name="descripcion" th:field="*{descripcion}"
+							class="form-control"
+							placeholder="Comparte tu opinión con el autor!"></textarea></td>
+
+				</tr>
+				<tr>
+					<td>Precio Pesos:</td>
+					<td><input type="text" th:field="*{precioPesos}" 
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<td><small class="form-text text-danger"
+						th:if="${#fields.hasErrors('precioPesos')}"
+						th:errors="*{precioPesos}"></small></td>
+				</tr>
+				<tr>
+					<td>Precio dolar :</td>
+					<td><input type="text" th:field="*{precioDolar}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Peso :</td>
+					<td><input type="text" th:field="*{peso}" class="form-control"
+						th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Largo :</td>
+					<td><input type="text" th:field="*{largo}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Ancho :</td>
+					<td><input type="text" th:field="*{ancho}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+				<tr>
+					<td>Profundo :</td>
+					<td><input type="text" th:field="*{profundo}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+
+				</tr>
+
+				<tr>
+					<td>Sube una Foto :</td>
+					<td><input type="file" name="fotoprim" th:field="*{foto1}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<small class="form-text text-danger"
+						th:if="${#fields.hasErrors('foto1')}" th:errors="*{foto1}"></small>
+					<td color="red">*</td>
+				</tr>
+
+
+				<tr>
+
+					<td align = "center"><input type="submit" value="Crear Prducto" /></td>
+				</tr>
+				
+				<tr >
+				<td color="red"><small >Los campos (*) son obligatorios</small></td>
+				</tr>
+				
+			</table>
+
+			<!-- 	<input type="hidden" th:field="*{id}" />  -->
+			<!-- 	<input type="hidden" th:field="*{micarrito}" /> -->
+		</form>
+
+	</div>
+</div>
+
+<!------------------------ FOOTER ------------------------------------>
+
+	<footer th:replace="layout/layout :: footer">
+		
+	</footer>
+
+
+</body>
+</html>

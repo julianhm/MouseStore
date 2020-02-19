@@ -1,154 +1,17 @@
 <!DOCTYPE html>
 <html xmlns: th = "http://www.thymeleaf.org">
-<head>
-<title th:text= "${'Mouse Store'}"></title>
-<meta charset="utf-8">
-
-<meta name="description" content="Proyecto Catalogo">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/bootstrap4/bootstrap.min.css}">
-<link th:href="@{/plugins/font-awesome-4.7.0/css/font-awesome.min.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/owl.theme.default.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/plugins/OwlCarousel2-2.2.1/animate.css}">
-<link th:href="@{/plugins/colorbox/colorbox.css}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/main_styles.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/styles/responsive.css}">
-</head>
+<head th:replace="layout/layout :: head"></head>
 <body>
+<!------------------------- Header ---------------------------------->
 
-<div class="super_container">
+	<header th:replace= "layout/layout :: header" >
 	
-	<!-- Header -->
-
-	<header class="header">
-		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
-			<div class="logo"><a th:text="${'Mouse Store'}" th:href="@{/index}"></a></div>
-			<nav class="main_nav">
-				<ul>
-					<li><a th:text="${'Inicio'}" th:href="@{/index}"></a></li>
-					<li><a th:text="${'Catalogo'}" th:href="@{/store}"></a></li>
-					<li><a th:text="${'Registro'}" th:href="@{/registro}"></a></li>
-					<li><a th:text="${'Carrito'}" th:href="@{/cart}"></a></li>
-					
-				</ul>
-			</nav>
-			<div class="header_content ml-auto">
-				
-				<div class="shopping">
-					<!-- Cart -->
-					<a th:href="@{/cart}" >
-						<div class="cart">
-							<img th:src="@{/images/shopping-bag.svg}" alt="" >
-							<div class="cart_num_container" >
-								<div class="cart_num_inner"  >
-									<div class="cart_num"  th:text="${cantidadCarrito}" ></div>
-								</div>
-							</div>
-						</div>
-					</a>
-					
-					<!-- Avatar -->
-					<a th:href="@{/login}">
-						<div class="avatar">
-							<img th:src="@{/images/avatar.svg}" alt="" th:text= "${ingresar}">
-						</div>
-					</a>
-				</div>
-			</div>
-
-		
 	</header>
 
 	
-</div>	
-	
+<!------------------------ Promo ------------------------------------>
 
-	<!-- Home -->
-
-	<div class="home">
-
-		<!-- Home Slider -->
-
-		<div class="home_slider_container">
-			<div class="owl-carousel owl-theme home_slider">
-
-				<!-- Home Slider Item -->
-				<div class="owl-item">
-					<div class="home_slider_background"
-						style="background-image: url(images/logoMouseStore.jpg)"></div>
-					<div class="home_slider_content">
-						<div class="home_slider_content_inner">
-							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
-							<div class="home_slider_title" th:text="${'Confianza y Calidad'}">
-
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Home Slider Item -->
-				<div class="owl-item">
-					<div class="home_slider_background"
-						style="background-image: url(images/logoMouseStoreGrisFONDO.jpg)"></div>
-					<div class="home_slider_content">
-						<div class="home_slider_content_inner">
-							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
-							<div class="home_slider_title" th:text="${'Confianza y Calidad'}"></div>
-						</div>
-					</div>
-				</div>
-
-
-				<!-- Home Slider Item -->
-				<div class="owl-item">
-					<div class="home_slider_background"
-						style="background-image: url(images/logoMouseStoreNegro.jpg)"></div>
-					<div class="home_slider_content">
-						<div class="home_slider_content_inner">
-							<div class="home_slider_subtitle" th:text="${'MOUSE STORE'}"></div>
-							<div class="home_slider_title" th:text="${'Confianza y Calidad'}"></div>
-						</div>
-
-					</div>
-
-				</div>
-			</div>
-			<!-- Home Slider Nav -->
-
-			<div
-				class="home_slider_next d-flex flex-column align-items-center justify-content-center">
-				<img src="images/arrow_r.png" alt="">
-			</div>
-
-			<!-- Home Slider Dots -->
-
-			<div class="home_slider_dots_container">
-				<div class="container">
-					<div class="row">
-						<div class="col">
-							<div class="home_slider_dots">
-								<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-									<li class="home_slider_custom_dot active">01.
-										<div></div>
-									</li>
-									<li class="home_slider_custom_dot">02.
-										<div></div>
-									</li>
-									<li class="home_slider_custom_dot">03.
-										<div></div>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<!-- Promo -->
+<div class="super_container"  style='float: center;margin:10px; padding: 80px; text-align: left;'>	
 
 	<div class="promo">
 		<div class="container">
@@ -164,10 +27,10 @@
 
 				<!-- Promo Item -->
 				<div class="col-lg-4 promo_col">
-					<div class="promo_item">
+					<div class="promo_item" style="width: 300px;height: 300px">
 						<div class="promo_image">
-							<img th:src="@{/images/diademaaaagamer.jpg}" alt="">
-							<div class="promo_content promo_content_1">
+							<img th:src="@{/images/diademaaaagamer.jpg}" alt="" style="width: 250px;height: 250px">
+							<div class="promo_content promo_content_2">
 								<div class="promo_title" th:text="${descuentouno}"></div>
 								<div class="promo_subtitle" th:text="${textouno}"></div>
 							</div>
@@ -178,9 +41,9 @@
 
 				<!-- Promo Item -->
 				<div class="col-lg-4 promo_col">
-					<div class="promo_item">
+					<div class="promo_item" style="width: 300px;height: 300px">
 						<div class="promo_image">
-							<img th:src="@{/images/mini-teclado6.jpg}" alt="">
+							<img th:src="@{/images/mini-teclado6.jpg}" alt="" style="width: 250px;height: 250px">
 							<div class="promo_content promo_content_2">
 								<div class="promo_title" th:text="${descuentodos}"></div>
 								<div class="promo_subtitle" th:text="${textodos}"></div>
@@ -192,10 +55,10 @@
 
 				<!-- Promo Item -->
 				<div class="col-lg-4 promo_col">
-					<div class="promo_item">
+					<div class="promo_item" style="width: 300px;height: 300px">
 						<div class="promo_image">
-							<img th:src="@{/images/mouseGamer.jpg}" alt="">
-							<div class="promo_content promo_content_3">
+							<img th:src="@{/images/mouseGamer.jpg}" alt="" style="width: 250px;height: 250px">
+							<div class="promo_content promo_content_2" >
 								<div class="promo_title" th:text="${descuentotres}"></div>
 								<div class="promo_subtitle" th:text="${textotres}"></div>
 							</div>
@@ -209,45 +72,14 @@
 	</div>
 </div>
 
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<div class="footer_logo"><a th:href="@{/index}" th:text="${'Mouse Store'}"></a></div>
-					<nav class="footer_nav">
-						<ul>
-							<li><a th:text="${'Inicio'}" th:href="@{/index}"></a></li>
-							<li><a th:text="${'Catalogo'}" th:href="@{/store}"></a></li>
-							<li><a th:text="${'Registro'}" th:href="@{/registro}"></a></li>
-							<li><a th:text="${'Carrito'}" th:href="@{/cart}"></a></li>
-							
-						</ul>
-					</nav>
-					<div class="footer_social">
-						<ul>
-							
-							<li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-		</div>
+
+
+<!------------------------ FOOTER ------------------------------------>
+
+	<footer th:replace="layout/layout :: footer">
+		
 	</footer>
 
-
-<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-<script th:src="@{/styles/bootstrap4/popper.js}"></script>
-<script th:src="@{/styles/bootstrap4/bootstrap.min.js}"></script>
-<script th:src="@{/plugins/OwlCarousel2-2.2.1/owl.carousel.js}"></script>
-<script th:src="@{/plugins/easing/easing.js}"></script>
-<script th:src="@{/plugins/parallax-js-master/parallax.min.js}"></script>
-<script th:src="@{/plugins/colorbox/jquery.colorbox-min.js}"></script>
-<script th:src="@{/js/custom.js}"></script>
 
 </body>
 </html>

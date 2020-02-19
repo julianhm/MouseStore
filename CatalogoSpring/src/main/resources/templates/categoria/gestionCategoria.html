@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns: th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<!------------------------- Header ---------------------------------->
+
+	<header th:replace="layout/layout :: header"> </header>
+
+
+	<!------------------------ PRODUCTOS ------------------------------------>
+
+	<div class="super_container"
+		style='float: center; margin: 10px; padding: 80px; text-align: left;'>
+
+		<form center th:action="@{/product}" th:object="${producto}"
+			method="post">
+			<table>
+
+
+				<tr>
+					<td>Categoria Nueva:</td>
+					<td><input type="text" th:field="*{nombre}"
+						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
+					<td><small class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small></td>
+				</tr>
+				<tr>
+					<td>Descripción :</td>
+					<td><textarea name="descripcion" th:field="*{descripcion}"
+							class="form-control"
+							placeholder="Comparte tu opinión con el autor!"></textarea></td>
+
+				</tr>
+				<tr>
+					<td>Categoria Padre :</td>
+					<td><select name="combo">
+							<!-- Opciones de la lista -->
+							<option value="1" selected>Opción 1</option>
+							<option value="2">Opción 2</option>
+							<option value="3">Opción 3</option>
+					</select></td>
+
+
+				</tr>
+
+
+
+
+				<tr>
+
+					<td align="center"><input type="submit" value="Crear Prducto" /></td>
+				</tr>
+
+				<tr>
+					<td color="red"><small>Los campos (*) son
+							obligatorios</small></td>
+				</tr>
+
+			</table>
+
+
+		</form>
+
+
+
+
+
+	</div>
+	<!------------------------ FOOTER ------------------------------------>
+
+	<footer th:replace="layout/layout :: footer"> </footer>
+
+
+</body>
+</html>

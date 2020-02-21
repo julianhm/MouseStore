@@ -7,63 +7,79 @@
 	<header th:replace="layout/layout :: header"> </header>
 
 
-	<!------------------------ PRODUCTOS ------------------------------------>
+	<!------------------------ CATEGORIAS ------------------------------------>
 
 	<div class="super_container"
-		style='float: center; margin: 10px; padding: 80px; text-align: left;'>
-
-		<form center th:action="@{/product}" th:object="${producto}"
-			method="post">
-			<table>
-
-
-				<tr>
-					<td>Categoria Nueva:</td>
-					<td><input type="text" th:field="*{nombre}"
-						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
-					<td><small class="form-text text-danger"
-						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small></td>
-				</tr>
-				<tr>
-					<td>Descripción :</td>
-					<td><textarea name="descripcion" th:field="*{descripcion}"
-							class="form-control"
-							placeholder="Comparte tu opinión con el autor!"></textarea></td>
-
-				</tr>
-				<tr>
-					<td>Categoria Padre :</td>
-					<td><select name="combo">
-							<!-- Opciones de la lista -->
-							<option value="1" selected>Opción 1</option>
-							<option value="2">Opción 2</option>
-							<option value="3">Opción 3</option>
-					</select></td>
-
-
-				</tr>
+		style='float: center; margin: 10px; padding: 80px; text-align: left; padding-top: 300px'>
 
 
 
 
-				<tr>
+		<div align="center">
+			<h1 th:text="${titulo}"></h1>
+			<div th:object="${categoria}" th:remove="tag">
+				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+					<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+				</ul>
+			</div>
 
-					<td align="center"><input type="submit" value="Crear Prducto" /></td>
-				</tr>
-
-				<tr>
-					<td color="red"><small>Los campos (*) son
-							obligatorios</small></td>
-				</tr>
-
-			</table>
-
-
-		</form>
+			<form style="position: center" th:action="@{/categoria/form}"
+				th:object="${categoria}" method="post">
+				<table>
 
 
+					<tr>
+						<td>(*) Nombre Categoria :</td>
+						<td><input type="text" th:field="*{nombre}"
+							class="form-control" th:errorclass="'form-control alert-danger'" /></td>
+						<td><small class="form-text text-danger"
+							th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
+						</small></td>
+					</tr>
+					<tr>
+						<td>Descripcion :</td>
+						<td><textarea name="descripcion" th:field="*{descripcion}"
+								class="form-control"
+								placeholder="Escribe una breve descripcion!"></textarea></td>
+
+					</tr>
+					<tr>
+						<td>Categoria Padre :</td>
+						<td><select name="combo" th:field="*{categoriaPadre}"
+							disabled="disabled">
+								<!-- Opciones de la lista -->
+								<option value=null selected>Sin Categoria</option>
+								<option th:each="lasCategorias:${todasCategorias}"
+									value="${lasCategorias.idCategoria}" th:text="${lasCategorias.nombre}"></option>
+
+						</select></td>
 
 
+					</tr>
+
+					<tr>
+					</tr>
+
+
+					<tr>
+						<td></td>
+						<td align="center"><input type="submit"
+							value="Crear Categoria" /></td>
+					</tr>
+
+					<tr>
+						<td color="red"><small>Los campos (*) son
+								obligatorios</small></td>
+					</tr>
+
+				</table>
+
+				<input type="hidden" th:field="*{idCategoria}" />
+			</form>
+
+
+
+		</div>
 
 	</div>
 	<!------------------------ FOOTER ------------------------------------>

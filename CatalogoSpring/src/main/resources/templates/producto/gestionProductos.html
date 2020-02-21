@@ -11,23 +11,31 @@
 	
 <!------------------------ PRDUCTOS ------------------------------------>
 
-<div class="super_container"  style='float: center;margin:10px; padding: 80px; text-align: left;'>	
+<div class="super_container"
+		style='float: center; margin: 10px; padding: 80px; text-align: left; padding-top: 300px'>
 
 
-	
+
 
 	<div align="center">
-		<h1 th:text="${titulo}"></h1>
-		<form center th:action="@{/product}" th:object="${producto}"
-			method="post">
+			<h1 th:text="${titulo}"></h1>
+			<div th:object="${producto}" th:remove="tag">
+				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+					<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+				</ul>
+			</div>
+			
+			<form style="position: center" th:action="@{/producto/form}"
+				th:object="${producto}" method="post" enctype="multipart/form-data">
 			<table>
-<tr>
-					<td>Categoria Padre :</td>
+			<tr>
+					<td>Categoria :</td>
 					<td><select name="combo">
 							<!-- Opciones de la lista -->
-							<option value="1" selected>Opción 1</option>
-							<option value="2">Opción 2</option>
-							<option value="3">Opción 3</option>
+							<option value=null selected>Sin Categoria</option>
+							<option th:each="lasCategorias:${todasCategorias}"
+									value="${lasCategorias.idCategoria}" th:text="${lasCategorias.nombre}"></option>
+							
 					</select></td>
 
 
@@ -44,73 +52,39 @@
 					<td>Descripción :</td>
 					<td><textarea name="descripcion" th:field="*{descripcion}"
 							class="form-control"
-							placeholder="Comparte tu opinión con el autor!"></textarea></td>
+							placeholder="Escribe una descripcion del producto!"></textarea></td>
 
 				</tr>
 				<tr>
 					<td>Precio Pesos:</td>
-					<td><input type="text" th:field="*{precioPesos}" 
+					<td><input type="text" th:field="*{precioPesos}" name="precio" 
 						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
 					<td><small class="form-text text-danger"
 						th:if="${#fields.hasErrors('precioPesos')}"
 						th:errors="*{precioPesos}"></small></td>
 				</tr>
+				
 				<tr>
-					<td>Precio dolar :</td>
-					<td><input type="text" th:field="*{precioDolar}"
-						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
-
+					<div class="form-group row">
+					<td><label for="file" class="col-sm-2 col-form-label">Imagenes:</label></td>
+					<div class="col-sm-6">
+					<td><input type ="file" name="file"  class="form-control"/></td>
+					</div>
+					</div>
 				</tr>
-				<tr>
-					<td>Peso :</td>
-					<td><input type="text" th:field="*{peso}" class="form-control"
-						th:errorClass="'form-control alert-danger'" /></td>
-
-				</tr>
-				<tr>
-					<td>Largo :</td>
-					<td><input type="text" th:field="*{largo}"
-						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
-
-				</tr>
-				<tr>
-					<td>Ancho :</td>
-					<td><input type="text" th:field="*{ancho}"
-						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
-
-				</tr>
-				<tr>
-					<td>Profundo :</td>
-					<td><input type="text" th:field="*{profundo}"
-						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
-
-				</tr>
-
-				<tr>
-					<td>Sube una Foto :</td>
-					<td><input type="file" name="fotoprim" th:field="*{foto1}"
-						class="form-control" th:errorClass="'form-control alert-danger'" /></td>
-					<small class="form-text text-danger"
-						th:if="${#fields.hasErrors('foto1')}" th:errors="*{foto1}"></small>
-					<td color="red">*</td>
-				</tr>
-
+				
 
 				<tr>
 
 					<td align = "center"><input type="submit" value="Crear Prducto" /></td>
 				</tr>
 				
-				<tr >
-				<td color="red"><small >Los campos (*) son obligatorios</small></td>
-				</tr>
+				
 				
 			</table>
-
-			<!-- 	<input type="hidden" th:field="*{id}" />  -->
-			<!-- 	<input type="hidden" th:field="*{micarrito}" /> -->
+			<input type="hidden" th:field="*{idProducto}" />
 		</form>
-
+		
 	</div>
 </div>
 

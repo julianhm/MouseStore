@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -39,21 +40,23 @@ public class Producto implements Serializable {
 	
 	public String descripcion;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="precio_pesos")
-	public double precioPesos;
+	public Double precioPesos;
 	
 	@Column(name="precio_dolar")
-	public double precioDolar;
+	public Double precioDolar;
 	
-	public double peso;
+	public Double peso;
 	
-	public double largo;
+	public Double largo;
 	
-	public double ancho;
+	public Double ancho;
 	
 	
-	public double profundo;
+	public Double profundo;
+	
+	private String Foto;
 	
 	/**
 	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -65,6 +68,11 @@ public class Producto implements Serializable {
 	
 
 	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public Long getIdProducto() {
 		return idProducto;
 	}
@@ -89,74 +97,62 @@ public class Producto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public double getPrecioPesos() {
+
+
+	public Double getPrecioPesos() {
 		return precioPesos;
 	}
 
-	public void setPrecioPesos(double precioPesos) {
+	public void setPrecioPesos(Double precioPesos) {
 		this.precioPesos = precioPesos;
 	}
 
-	public double getPrecioDolar() {
+	public Double getPrecioDolar() {
 		return precioDolar;
 	}
 
-	public void setPrecioDolar(double precioDolar) {
+	public void setPrecioDolar(Double precioDolar) {
 		this.precioDolar = precioDolar;
 	}
 
-	public double getPeso() {
+	public Double getPeso() {
 		return peso;
 	}
 
-	public void setPeso(double peso) {
+	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
 
-	public double getLargo() {
+	public Double getLargo() {
 		return largo;
 	}
 
-	public void setLargo(double largo) {
+	public void setLargo(Double largo) {
 		this.largo = largo;
 	}
 
-	public double getAncho() {
+	public Double getAncho() {
 		return ancho;
 	}
 
-	public void setAncho(double ancho) {
+	public void setAncho(Double ancho) {
 		this.ancho = ancho;
 	}
 
-	public double getProfundo() {
+	public Double getProfundo() {
 		return profundo;
 	}
 
-	public void setProfundo(double profundo) {
+	public void setProfundo(Double profundo) {
 		this.profundo = profundo;
 	}
 
-	
-	
-	
-
-
-/**
-	public List<Categoria> getCategorias() {
-		return categorias;
+	public String getFoto() {
+		return Foto;
 	}
 
-	public void setCategorias(List<Categoria> categorias) {
-		this.categorias = categorias;
-	}
-	
-	public void addCategoria(Categoria categoria) {
-		categorias.add(categoria);
-	}
-*/
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setFoto(String foto) {
+		Foto = foto;
 	}
 	
 	

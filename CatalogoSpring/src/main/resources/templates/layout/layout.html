@@ -48,14 +48,14 @@
 					<li class="nav-item active"><a th:text="'Inicio'"
 						th:href="@{/index}" class="nav-link"></a></li>
 					<li class="nav-item"><a th:text="'Catalogo'"
-						th:href="@{/store}" class="nav-link"></a></li>
+						th:href="@{/producto/store}" class="nav-link"></a></li>
 					<li class="nav-item"><a th:text="'Registro'"
-						th:href="@{/registro}" class="nav-link"></a></li>
-					<li class="nav-item"><a th:text="'Carrito'" th:href="@{/cart}"
+						th:href="@{/cliente/registro}" class="nav-link"></a></li>
+					<li class="nav-item"><a th:text="'Carrito'" th:href="@{/pedido/carrito}"
 						class="nav-link"></a></li>
-						<li class="nav-item"><a th:text="'Producto'" th:href="@{/producto}"
+						<li class="nav-item"><a th:text="'Producto'" th:href="@{/producto/form}"
 						class="nav-link"></a></li>
-						<li class="nav-item"><a th:text="'Categoria'" th:href="@{/categoria}"
+						<li class="nav-item"><a th:text="'Categoria'" th:href="@{/categoria/form}"
 						class="nav-link"></a></li>
 
 				</ul>
@@ -85,18 +85,24 @@
 			</div>
 
 		</nav>
-
+		<div class="container">
+		<div  class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+		<div  class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+		<div  class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+		<div  class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+		</div>
+		
 	</header>
 
 
 
 	<!----------------------- CUERPO ---------------------------------------->
 
-	<div class="promo">
+
 		<div class="container">
 		
 		</div>
-	</div>
+	
 
 
 	<footer th:fragment="footer" class="footer" style="padding-top: 0px">

@@ -104,7 +104,7 @@ public class ClienteController {
 		model.put("titulo", "Formulario de Cliente");
 		model.put("ingresar", "  Ingresar");
 		
-		return "registroCliente";
+		return "/cliente/registroCliente";
 
 	}
 	

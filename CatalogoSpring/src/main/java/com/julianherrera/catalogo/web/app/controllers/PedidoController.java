@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +33,17 @@ public class PedidoController {
 	 * **************************************************************************************
 	 */
 	
+	//Metodo que me permito buscar todos los Clientee y enviarlo a la vista cliente
+		@GetMapping(value = "/carrito")
+		public String cargarPedidos(Model model) {
+			
+			model.addAttribute("ingresar", "  Ingresar");
+			model.addAttribute("titulo", "Cliente");
+			
+			
+			return "pedido/carrito";
+			
+		}
 	
 	//Metodo que me permito buscar todos los Clientee y enviarlo a la vista cliente
 	@RequestMapping(value = "/carrito/{clienteId}",method = RequestMethod.POST)

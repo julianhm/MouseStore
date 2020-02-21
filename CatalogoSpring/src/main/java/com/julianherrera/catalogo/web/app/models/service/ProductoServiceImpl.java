@@ -3,6 +3,8 @@ package com.julianherrera.catalogo.web.app.models.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +45,13 @@ public class ProductoServiceImpl implements IProductoService{
 	public void eliminar(Long id) {
 		// TODO Auto-generated method stub
 		productoDao.deleteById(id);
+	}
+
+	@Transactional
+	@Override
+	public Page<Producto> buscarProducto(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return productoDao.findAll(pageable);
 	}
 
 }

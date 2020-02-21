@@ -3,6 +3,8 @@ package com.julianherrera.catalogo.web.app.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.julianherrera.catalogo.web.app.models.entity.Categoria;
 import com.julianherrera.catalogo.web.app.models.entity.Cliente;
@@ -39,15 +42,40 @@ public class CategoriaController {
 	
 	//Metodo que me permito buscar todos los Clientee y enviarlo a la vista cliente
 	@GetMapping(value = "/form")
-	public String buscarCategorias(Model model) {
+	public String buscarCategorias(Model model, RedirectAttributes flash) {
 		
-		model.addAttribute("ingresar", "  Ingresar");
-		model.addAttribute("titulo", "Cliente");
-		model.addAttribute("cliente",categoriaService.bucarCategoria());
+		Categoria categoria = new Categoria();
+		
+		model.addAttribute("titulo","Agregar Categorias");
+		model.addAttribute("categoria",categoria);
+		
+		model.addAttribute("todasCategorias",categoriaService.bucarCategoria());
+		if(categoriaService.bucarCategoria().size()>0) {
+			flash.addFlashAttribute("info", "No existen categorias");
+		}
 		
 		return "categoria/gestionCategoria";
 		
 	}
+	
+	@RequestMapping(value="/form", method= RequestMethod.POST)
+	public String crearCategoria(@Valid Categoria categoria, BindingResult result,Model model, RedirectAttributes flash, SessionStatus status) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("titulo","Agregar Categorias");
+			
+			return "categoria/gestionCategoria";
+		}
+		
+		categoriaService.crear(categoria);
+		status.setComplete();
+		flash.addFlashAttribute("error", "Exixten errores en el formulario");
+		flash.addFlashAttribute("success", "categoria creado con exito");
+		
+		return "redirect:/categoria/form";
+
+	}
+	
 	
 	@GetMapping(value="/eliminarcliente/{id}")
 	public String eliminarCategoria(@PathVariable(value="id") Long id) {
@@ -60,22 +88,7 @@ public class CategoriaController {
 	}
 	
 
-	//Metodo que permite ir a la pagina para crear un nuevo producto
-	@RequestMapping(value="/crear", method= RequestMethod.POST)
-	public String crearCategoria(Model model) {
-		
-		Producto producto = new Producto();
-		model.addAttribute("producto",producto);
-		model.addAttribute("titulo", "Formulario de Productos");
-
-		model.addAttribute("cantidadCarrito", 0);
-		model.addAttribute("tituloPrin", "Productos");
-		model.addAttribute("ingresar", "  Administrador");
-		
-		
-		return "redirect:/categoria/gestionCategoria";
-
-	}
+	
 	
 	
 		

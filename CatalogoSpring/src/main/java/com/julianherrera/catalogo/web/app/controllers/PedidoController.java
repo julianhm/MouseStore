@@ -1,5 +1,7 @@
 package com.julianherrera.catalogo.web.app.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.julianherrera.catalogo.web.app.models.entity.Cliente;
+import com.julianherrera.catalogo.web.app.models.entity.Pedido;
 import com.julianherrera.catalogo.web.app.models.entity.Producto;
 import com.julianherrera.catalogo.web.app.models.service.IClienteService;
 import com.julianherrera.catalogo.web.app.models.service.IPedidoService;
@@ -24,6 +27,9 @@ public class PedidoController {
 	@Autowired
 	public IPedidoService pedidoService;
 	
+	
+	@Autowired
+	public IClienteService clienteService;
 	
 	
 	
@@ -36,9 +42,16 @@ public class PedidoController {
 	//Metodo que me permito buscar todos los Clientee y enviarlo a la vista cliente
 		@GetMapping(value = "/carrito")
 		public String cargarPedidos(Model model) {
+			List<Pedido> miPedido = new ArrayList<Pedido>();
+			Cliente miCliente=new Cliente();
+			
+			miCliente= clienteService.buscar((long) 1.0);
+			
+			miPedido = pedidoService.buscarPedidoCliente(miCliente.getId());
 			
 			model.addAttribute("ingresar", "  Ingresar");
 			model.addAttribute("titulo", "Cliente");
+			model.addAttribute("pedido",miPedido);
 			
 			
 			return "pedido/carrito";

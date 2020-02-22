@@ -24,8 +24,8 @@ public class ItemPedido implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_item_producto")
-	private Long idItemProducto;
+	@Column(name = "id_item_pedido")
+	private Long idItemPedido;
 	
 	
 	private Integer cantidad;
@@ -34,13 +34,26 @@ public class ItemPedido implements Serializable{
 	@JoinColumn(name="id_producto")
 	private Producto producto;
 	
-	public Long getIdItemProducto() {
-		return idItemProducto;
+	
+
+
+	public Long getIdItemPedido() {
+		return idItemPedido;
 	}
 
 
-	public void setIdItemProducto(Long idItemProducto) {
-		this.idItemProducto = idItemProducto;
+	public void setIdItemPedido(Long idItemPedido) {
+		this.idItemPedido = idItemPedido;
+	}
+
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 

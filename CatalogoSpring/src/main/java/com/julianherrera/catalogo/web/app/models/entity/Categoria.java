@@ -28,17 +28,16 @@ public class Categoria implements Serializable {
 	 */
 	private static final long serialVersionUID = -5053293076312367817L;
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categoria")
 	public Long idCategoria;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoria_padre", referencedColumnName = "id_categoria")
 	public Categoria categoriaPadre;
 
-	@OneToMany(mappedBy = "categoriaPadre")
+	@OneToMany(mappedBy = "categoriaPadre", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	public List<Categoria> categoriasHijo;
 
 	@NotEmpty
@@ -46,9 +45,11 @@ public class Categoria implements Serializable {
 
 	public String descripcion;
 
+	public String foto;
+
 	public Categoria() {
 
-		 categoriasHijo= new ArrayList<Categoria>();
+		categoriasHijo = new ArrayList<Categoria>();
 	}
 
 	public Long getIdCategoria() {
@@ -65,6 +66,14 @@ public class Categoria implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	
@@ -85,16 +94,16 @@ public class Categoria implements Serializable {
 		this.categoriasHijo = categoriasHijo;
 	}
 	
-	public void addCategoriasHijo(Categoria categoriaHijo) {
-		categoriasHijo.add( categoriaHijo) ;
+	public void addCategoriaHijo(Categoria categoriaHijo) {
+		this.categoriasHijo.add(categoriaHijo);
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getFoto() {
+		return foto;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public static long getSerialversionuid() {

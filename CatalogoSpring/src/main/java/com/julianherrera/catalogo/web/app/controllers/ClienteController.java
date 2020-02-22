@@ -70,16 +70,10 @@ public class ClienteController {
 		@RequestMapping(value = "/login", method= RequestMethod.POST)
 		public String buscarClienteCorreo(Cliente cliente, Model model) {
 			
-			if(cliente.getCorreo().equals("admin@admin.com")&&cliente.getClave().equals("admin123")) {
-				return "redirect:/cliente";
-			}
 			
 			Cliente miCliente= clienteService.buscarPorCorreo(cliente.getCorreo())	;
 			
-			if(cliente.getCorreo().equals(miCliente.getCorreo()) && cliente.getClave().equals(miCliente.getClave()) ) {
-				cliente=miCliente;
-				return "redirect:/index/"+cliente.getId();
-			}
+			
 				return "redirect:/index";
 			
 				

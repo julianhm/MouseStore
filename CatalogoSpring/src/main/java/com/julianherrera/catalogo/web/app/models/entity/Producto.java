@@ -2,6 +2,7 @@ package com.julianherrera.catalogo.web.app.models.entity;
 
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -32,43 +33,34 @@ public class Producto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_producto")
-	public Long idProducto;
+	private Long idProducto;
 	
 	@NotEmpty
-	public String nombre;
+	private String nombre;
 	
 	
-	public String descripcion;
+	private String descripcion;
 	
-	@NotNull
+	
 	@Column(name="precio_pesos")
-	public Double precioPesos;
+	private Double precioPesos;
 	
 	@Column(name="precio_dolar")
-	public Double precioDolar;
+	private Double precioDolar;
 	
-	public Double peso;
+	private Double peso;
 	
-	public Double largo;
+	private Double largo;
 	
-	public Double ancho;
+	private Double ancho;
 	
 	
-	public Double profundo;
+	private Double profundo;
 	
 	private String Foto;
 	
-	/**
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinTable(name="categorias_productos", 
-	joinColumns = @JoinColumn(name="categoria_id"),
-	inverseJoinColumns = @JoinColumn(name="producto_id"))*/
-	//public List<Categoria> categorias;
-	
-	
 
 	
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -155,7 +147,9 @@ public class Producto implements Serializable {
 		Foto = foto;
 	}
 	
-	
+	//public void addFoto(String foto) {
+	//	Foto.add(foto);
+	//}
 	
 	
 

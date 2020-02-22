@@ -15,13 +15,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "pedidos")
-public class Pedido implements Serializable{
+public class Pedido implements Serializable {
 
 	/**
 	 * 
@@ -31,35 +31,29 @@ public class Pedido implements Serializable{
 	@NotEmpty
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_pedido")
-	public Long idPedido;
+	@Column(name = "id_pedido")
+	private Long idPedido;
+
 	
+	private String observaciones;
+
+
 	
-	
-	@NotEmpty
-	public int cantidad;
-	
-	public String direccion;
-	
-	public double costo;
-	
-	
-	
-	
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
-	public Cliente cliente;
+	private Cliente cliente;
 	
-	/**
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinTable(name="pedidos_productos", 
-	joinColumns = @JoinColumn(name="pedido_id"),
-	inverseJoinColumns = @JoinColumn(name="producto_id"))*/
-	//public List<Producto> productos;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="pedidos_ids")
+	private List<ItemPedido> items;
+	
 
-
+	
+	
 	public Pedido() {
-		//productos = new ArrayList<Producto>();
+		this.items= new ArrayList<ItemPedido>();
+		
 	}
 
 	public Long getIdPedido() {
@@ -71,18 +65,15 @@ public class Pedido implements Serializable{
 	}
 
 	
-	public int getCantidad() {
-		return cantidad;
+
+	public String getObservaciones() {
+		return observaciones;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.cantidad = cantidad;
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
-	
-	
 
-	
-/**
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -91,27 +82,35 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
-	/**public List<Producto> getProdutos() {
-		return productos;
+	
+	
+	public List<ItemPedido> getItems() {
+		return items;
 	}
 
-	public void setProdutos(List<Producto> produtos) {
-		this.productos = produtos;
+	public void setItems(List<ItemPedido> items) {
+		this.items = items;
 	}
 	
-	public void addProducto(Producto producto) {
-		productos.add(producto);
+	public void addItemsPedido(ItemPedido item) {
+		this.items.add(item); 
 	}
-*/
+	
+	
+	public Double getTotal() {
+		Double total=0.0;
+		
+		int size = items.size();
+		
+		for(int i=0; i<size; i++) {
+			total+= items.get(i).calcularImporte();
+		}
+		return total;
+				
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	
-	
-	
-	
-
-	
 
 }

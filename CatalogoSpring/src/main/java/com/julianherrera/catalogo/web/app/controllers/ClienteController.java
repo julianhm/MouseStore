@@ -1,5 +1,9 @@
-package com.julianherrera.catalogo.web.app.controllers;
+  package com.julianherrera.catalogo.web.app.controllers;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +19,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.julianherrera.catalogo.web.app.models.entity.Cliente;
@@ -49,10 +55,10 @@ public class ClienteController {
 	public String buscarClientes(Model model) {
 		
 		model.addAttribute("ingresar", "  Ingresar");
-		model.addAttribute("titulo", "Cliente");
+		model.addAttribute("titulo", " Listado de Cliente");
 		model.addAttribute("cliente",clienteService.bucarCliente());
 		
-		return "cliente";
+		return "cliente/listarClientes";
 		
 	}
 	
@@ -63,7 +69,7 @@ public class ClienteController {
 			clienteService.eliminar(id);
 		}
 		
-		return "redirect:/cliente";
+		return "redirect:/cliente/cliente";
 	}
 	
 
@@ -108,7 +114,9 @@ public class ClienteController {
 	
 	//Se recibe el cliente desde la vista y se almacena en base de datos
 	@RequestMapping(value="/registro", method = RequestMethod.POST)
-	public String GuardarCliente(@Valid Cliente cliente, BindingResult result,Model model, RedirectAttributes flash, SessionStatus status) {
+	public String GuardarCliente(@Valid Cliente cliente, BindingResult result,  
+			@RequestParam("file") MultipartFile foto, 
+			Model model, RedirectAttributes flash, SessionStatus status) {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Cliente");
@@ -116,10 +124,26 @@ public class ClienteController {
 			return "/cliente/registroCliente";
 		}
 		
+		if(!foto.isEmpty()) {
+			 Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
+			 String rootPath = directorioRecursos.toFile().getAbsolutePath();
+			 try {
+				byte[] bytes = foto.getBytes();
+				Path rutaCompleta = Paths.get(rootPath + "//" + foto.getOriginalFilename());
+				Files.write(rutaCompleta, bytes);
+				flash.addFlashAttribute("info", "Has subido correctamente la foto '" + foto.getOriginalFilename()+"'");
+				
+				cliente.setFoto(foto.getOriginalFilename());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		
 		clienteService.crear(cliente);
 		status.setComplete();
-		flash.addFlashAttribute("error", "Exixten errores en el formulario");
+
 		flash.addFlashAttribute("success", "EL cliente fue creado con exito");
 		
 		return "redirect:/index";

@@ -28,11 +28,11 @@
 		
 		
 		<form style="position: center" th:action="@{/cliente/registro}" th:object="${cliente}"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			
 			<table>
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Nombre * :</label></th>
+			<th><label>Nombre * :</label></th>
 			<th><input type="text" th:field="*{nombre}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /> </th>
 			<th><small
@@ -44,7 +44,7 @@
 			
 			
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Correo * :</label></th>
+			<th><label >Correo * :</label></th>
 			<th><input type="text" th:field="*{correo}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /> </th>
 			<th><small
@@ -55,7 +55,7 @@
 			
 			
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Direccion * :</label> </th>
+			<th><label >Direccion * :</label> </th>
 			<th><input type="text" th:field="*{direccion}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /> </th>
 			<th><small
@@ -66,7 +66,7 @@
 			
 			
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Pais * :</label></th>
+			<th><label >Pais * :</label></th>
 			<th><input type="text" th:field="*{pais}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /> </th>
 			<th><small
@@ -77,7 +77,7 @@
 			
 			
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Estado * :</label></th>
+			<th><label>Estado * :</label></th>
 			<th><input type="text" th:field="*{estado}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /> </th>
 			<th><small
@@ -87,7 +87,7 @@
 			</tr>
 			
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Código Postal * :</label></th>
+			<th><label >Codigo Postal * :</label></th>
 			<th><input type="text" th:field="*{codPostal}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /> </th>
 			<th><small
@@ -97,7 +97,7 @@
 			</tr>
 			
 			<tr>
-			<th><label class="col-sm-2 col-form-label">Telefono Fijo :</label></th>
+			<th><label >Telefono Fijo :</label></th>
 			<th><input type="text" th:field="*{telefono}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /></th>
 			<th><small
@@ -108,7 +108,7 @@
 			
 			
 			<tr>
-			<th>	<label class="col-sm-2 col-form-label">Celular  *:</label></th>
+			<th>	<label >Celular  *:</label></th>
 			<th><input type="text" th:field="*{celular}" class="form-control"
 						th:errorClass="'form-control alert-danger'" /></th>
 			<th><small
@@ -116,6 +116,15 @@
 						th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}"></small></th>
 						
 			</tr>
+			
+			<tr>
+					
+					<th><label for="file" >Foto :</label></th>
+					
+					<th><input type ="file" name="file"  class="form-control"/></th>
+					
+					
+				</tr>
 			
 			<tr> </tr>
 			

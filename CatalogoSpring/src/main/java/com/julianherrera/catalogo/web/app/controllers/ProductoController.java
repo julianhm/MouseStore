@@ -143,7 +143,9 @@ public class ProductoController {
 			return "redirect:/producto/form";
 		}
 
-	
+		
+//		
+			
 	
 	
 	//metodo que retorna una lista de productos
@@ -176,10 +178,10 @@ public class ProductoController {
 	@RequestMapping(value="/store", method= RequestMethod.GET)
 	public String catalogo(@RequestParam(name="page", defaultValue = "0") int page,Model model) {
 		
-		Pageable pageRequest = PageRequest.of(page, 12);
+		Pageable pageRequest = PageRequest.of(page,3);
 		
 		Page<Producto> productos= productoService.buscarProducto(pageRequest);
-		PageRender<Producto> pageRender=new PageRender<>("/listarProductos", productos);
+		PageRender<Producto> pageRender=new PageRender<>("/producto/store", productos);
 		model.addAttribute("cantidadCarrito", 0);
 		model.addAttribute("titulo", "CATALOGO");
 		model.addAttribute("ingresar", "  Ingresar");
@@ -187,12 +189,28 @@ public class ProductoController {
 		model.addAttribute("page",pageRender);
 		
 		
-		return "producto/store";
+		return "/producto/store";
 		
 	}
 	
 	
-	
+	@RequestMapping(value="/listadoproductosadmin", method= RequestMethod.GET)
+	public String listarProductos(@RequestParam(name="page", defaultValue = "0") int page,Model model) {
+		
+		Pageable pageRequest = PageRequest.of(page, 3);
+		
+		Page<Producto> productos= productoService.buscarProducto(pageRequest);
+		PageRender<Producto> pageRender=new PageRender<Producto>("/producto/listadoproductosadmin/", productos);
+		model.addAttribute("cantidadCarrito", 0);
+		model.addAttribute("titulo", "CATALOGO");
+		model.addAttribute("ingresar", "  Ingresar");
+		model.addAttribute("productos",productos);
+		model.addAttribute("page",pageRender);
+		
+		
+		return "/producto/listarProductosAdmin";
+	}
+
 	
 
 }

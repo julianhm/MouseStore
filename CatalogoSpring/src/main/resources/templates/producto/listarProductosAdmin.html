@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thimeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+<!------------------------- Header ---------------------------------->
+
+	<header th:replace= "layout/layout :: header" >
+	
+	</header>
+
+	
+<!------------------------ CLIENTE ------------------------------------>
+
+<div class="super_container"  style='float: center;margin:10px; padding: 80px; text-align: left;'>	
+
+	<!-- FORMULARIO PARA GESTIONAR CLIENTES -->	
+		
+	
+
+<!-- Creacion de tabla clientes -->
+<div class="container" align="center">
+<h1 class= "text-primary " th:text="${'LISTADO DE PRODUCTOS'}"></h1>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Identificador Producto</th>
+				<th>Imagen</th>
+				<th>Nombre</th>
+				<th>Descripcion</th>
+				<th>Precio</th>
+				<th>Peso</th>
+				<th>Largo</th>
+				<th>Ancho</th>
+				<th>Profundo</th>
+				<th>Editar</th>
+				<th>Eliminar</th>
+				
+				
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item:${productos}">
+				<td th:text="${item.idProducto}"></td>
+				<td><img class="img-thumbnail rounded float-left"
+				style="max-width:20%;" th:src="@{'/uploads/'+${item.foto}}"
+				th:alt="${item.foto}"/></td>
+				<td th:text="${item.nombre}"></td>
+				<td th:text="${item.descripcion}"></td>
+				<td th:text="${item.precioPesos}"></td>
+				<td th:text="${item.peso}"></td>
+				<td th:text="${item.largo}"></td>
+				<td th:text="${item.ancho}"></td>
+				<td th:text="${item.profundo}"></td>
+				
+				
+				<td><a class="btn btn-primary btn-xs" th:href="@{/producto/editarproducto/} + ${item.idProducto}" >Editar</a></td>
+				<td><a class="btn btn-danger btn-xs" th:href="@{/producto/eliminarproducto/} + ${item.idProducto}" onclick="return confirm('esta seguro?');">Eliminar</a></td>
+				
+				
+				
+			</tr>
+			
+		</tbody>
+	</table>
+	<nav  th:replace="layout/paginator-nav :: paginator"></nav>
+</div>
+
+				
+				
+				
+				
+
+</div>
+<!------------------------ FOOTER ------------------------------------>
+
+	<footer th:replace="layout/layout :: footer">
+		
+	</footer>
+
+</html>

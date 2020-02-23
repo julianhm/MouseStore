@@ -20,23 +20,22 @@
 				<div class="row">
 				
 				<!--------- -------PRODUCTOS ---------------------- -->
-					<div class="col-6 col-md-4">
+					<div class="col-6 col-md-4" th:each="item:${producto}" >
 						
-						<div class="product">
+						<div class="product" >
 							<div class="product_image">
-								<img src="/images/mouseGamer.jpg" alt="">
+								<img class="img-thumbnail rounded float-left"
+										 th:src="@{'/uploads/'+${item.foto}}"
+										th:alt="${item.foto}"
+										style="width: 100%; height: 300px"/>
 							</div>
-							<div class="rating rating_5" data-rating="5">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
+							
 							<div class="product_content clearfix">
 								<div class="product_info">
 									<div class="product_name">
-										<a th:href="@{/producto}">Mouse de Gamer Genius</a>
+										<a th:href="@{/producto/form}" th:text="${item.nombre}"></a>
 									</div>
-									<div class="product_price">$35.00</div>
+									<div class="product_price" th:text="${item.precioPesos}"></div>
 								</div>
 								<div class="product_options">
 									<div class="product_buy product_option">
@@ -50,75 +49,21 @@
 					</div>
 					
 					
-						<!--------- -------PRODUCTOS ---------------------- -->
-					<div class="col-6 col-md-4">
-						
-						<div class="product">
-							<div class="product_image">
-								<img src="/images/mouseGamer.jpg" alt="">
-							</div>
-							<div class="rating rating_5" data-rating="5">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
-							<div class="product_content clearfix">
-								<div class="product_info">
-									<div class="product_name">
-										<a th:href="@{/producto}">Mouse de Gamer Genius</a>
-									</div>
-									<div class="product_price">$35.00</div>
-								</div>
-								<div class="product_options">
-									<div class="product_buy product_option">
-										<img src="/images/shopping-bag-white.svg" alt="">
-									</div>
-									<div class="product_fav product_option">+</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-					
-					
-						<!--------- -------PRODUCTOS ---------------------- -->
-					<div class="col-6 col-md-4">
-						
-						<div class="product">
-							<div class="product_image">
-								<img src="/images/mouseGamer.jpg" alt="">
-							</div>
-							<div class="rating rating_5" data-rating="5">
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-									class="fa fa-star"></i>
-							</div>
-							<div class="product_content clearfix">
-								<div class="product_info">
-									<div class="product_name">
-										<a th:href="@{/producto}">Mouse de Gamer Genius</a>
-									</div>
-									<div class="product_price">$35.00</div>
-								</div>
-								<div class="product_options">
-									<div class="product_buy product_option">
-										<img src="/images/shopping-bag-white.svg" alt="">
-									</div>
-									<div class="product_fav product_option">+</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
+	
 					
 
 				</div>
 				
 				</div>
+				
+				
+				
+				<nav  th:replace="layout/paginator-nav :: paginator"></nav>
+				
 				
 			</div>
 			
-			<nav th:replace="layout/paginator-nav :: paginator"></nav>	
+				
 					
 	</div>
 	<!------------------------ FOOTER ------------------------------------>

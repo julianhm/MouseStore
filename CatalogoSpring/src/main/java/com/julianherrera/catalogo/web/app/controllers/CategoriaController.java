@@ -42,7 +42,7 @@ public class CategoriaController {
 	
 	//Metodo que me permito buscar todos los Clientee y enviarlo a la vista cliente
 	@GetMapping(value = "/form")
-	public String buscarCategorias(Model model, RedirectAttributes flash) {
+	public String buscarCategorias(Model model) {
 		
 		Categoria categoria = new Categoria();
 		
@@ -50,9 +50,7 @@ public class CategoriaController {
 		model.addAttribute("categoria",categoria);
 		
 		model.addAttribute("todasCategorias",categoriaService.bucarCategoria());
-		if(categoriaService.bucarCategoria().size()>0) {
-			flash.addFlashAttribute("info", "No existen categorias");
-		}
+	
 		
 		return "categoria/gestionCategoria";
 		
@@ -69,7 +67,7 @@ public class CategoriaController {
 		
 		categoriaService.crear(categoria);
 		status.setComplete();
-		flash.addFlashAttribute("error", "Exixten errores en el formulario");
+		
 		flash.addFlashAttribute("success", "categoria creado con exito");
 		
 		return "redirect:/categoria/form";

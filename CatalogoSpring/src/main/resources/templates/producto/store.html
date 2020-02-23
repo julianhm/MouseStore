@@ -33,15 +33,16 @@
 							<div class="product_content clearfix">
 								<div class="product_info">
 									<div class="product_name">
-										<a th:href="@{/producto/form}" th:text="${item.nombre}"></a>
+										<a th:href="@{/producto/detalleproducto/+${item.idProducto}}" th:text="${item.nombre}"></a>
 									</div>
 									<div class="product_price" th:text="${item.precioPesos}"></div>
 								</div>
 								<div class="product_options">
 									<div class="product_buy product_option">
-										<img src="/images/shopping-bag-white.svg" alt="">
+										<a th:href="@{/producto/detalleproducto/+${item.idProducto}}">
+										<img th:src="@{'/images/shopping-bag-white.svg'}"></a>
 									</div>
-									<div class="product_fav product_option">+</div>
+									
 								</div>
 							</div>
 						</div>

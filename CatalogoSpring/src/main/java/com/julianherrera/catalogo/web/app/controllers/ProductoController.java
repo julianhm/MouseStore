@@ -178,7 +178,7 @@ public class ProductoController {
 	@RequestMapping(value="/store", method= RequestMethod.GET)
 	public String catalogo(@RequestParam(name="page", defaultValue = "0") int page,Model model) {
 		
-		Pageable pageRequest = PageRequest.of(page,3);
+		Pageable pageRequest = PageRequest.of(page,2);
 		
 		Page<Producto> productos= productoService.buscarProducto(pageRequest);
 		PageRender<Producto> pageRender=new PageRender<>("/producto/store", productos);
@@ -212,5 +212,18 @@ public class ProductoController {
 	}
 
 	
+	@RequestMapping(value="/detalleproducto/{id}", method= RequestMethod.GET)
+	public String detalleProducto(@PathVariable(value="id") Long id, Model model) {
+		
+		
+		model.addAttribute("cantidadCarrito", 0);
+		model.addAttribute("titulo", "CATALOGO");
+		model.addAttribute("ingresar", "  Ingresar");
+		
+		
+		
+		return "/producto/detalleProducto";
+	}
+
 
 }

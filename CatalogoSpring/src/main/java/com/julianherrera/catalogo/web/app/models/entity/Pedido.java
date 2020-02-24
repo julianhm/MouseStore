@@ -28,7 +28,7 @@ public class Pedido implements Serializable {
 	 */
 	private static final long serialVersionUID = 2805550548255165117L;
 
-	@NotEmpty
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_pedido")
@@ -37,7 +37,7 @@ public class Pedido implements Serializable {
 	
 	private String observaciones;
 
-
+	private Boolean activo;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -53,6 +53,7 @@ public class Pedido implements Serializable {
 	
 	public Pedido() {
 		this.items= new ArrayList<ItemPedido>();
+		activo=true;
 		
 	}
 
@@ -107,6 +108,16 @@ public class Pedido implements Serializable {
 		}
 		return total;
 				
+	}
+
+	
+	
+	public Boolean getActivo() {
+		return activo;
+	}
+
+	public void setActivo(Boolean activo) {
+		this.activo = activo;
 	}
 
 	public static long getSerialversionuid() {

@@ -54,6 +54,14 @@ public class PedidoServiceImpl implements IPedidoService{
 		// TODO Auto-generated method stub
 		pedidoDao.deleteById(id);
 	}
+
+	@Override
+	public List<Pedido> buscarPedidos() {
+		// TODO Auto-generated method stub
+		return (List<Pedido>) pedidoDao.findAll();
+	}
+
+	
 	
 	
 

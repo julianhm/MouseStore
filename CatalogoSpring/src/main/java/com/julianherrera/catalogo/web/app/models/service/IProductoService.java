@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.julianherrera.catalogo.web.app.models.entity.Producto;
 
 public interface IProductoService {
+	
 	public List<Producto> bucarProducto();
 	public Page<Producto> buscarProducto(Pageable pageable);
 	public void crear(Producto producto);

@@ -59,6 +59,10 @@ public class Producto implements Serializable {
 	
 	private String Foto;
 	
+	private String Foto2;
+	
+	private String Foto3;
+	
 
 	
 	public static long getSerialversionuid() {
@@ -146,10 +150,23 @@ public class Producto implements Serializable {
 	public void setFoto(String foto) {
 		Foto = foto;
 	}
+
+	public String getFoto2() {
+		return Foto2;
+	}
+
+	public void setFoto2(String foto2) {
+		Foto2 = foto2;
+	}
+
+	public String getFoto3() {
+		return Foto3;
+	}
+
+	public void setFoto3(String foto3) {
+		Foto3 = foto3;
+	}
 	
-	//public void addFoto(String foto) {
-	//	Foto.add(foto);
-	//}
 	
 	
 

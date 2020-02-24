@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.julianherrera.catalogo.web.app.models.entity.Cliente;
+import com.julianherrera.catalogo.web.app.models.entity.Pedido;
 import com.julianherrera.catalogo.web.app.models.entity.Producto;
 import com.julianherrera.catalogo.web.app.models.service.ICategoriaService;
 import com.julianherrera.catalogo.web.app.models.service.IClienteService;
@@ -70,7 +71,8 @@ public class ProductoController {
 	//Este metodo recibe el producto creado en la vista y lo envia a la base de datos
 		@RequestMapping(value="/form", method = RequestMethod.POST)
 		public String GuardarProducto(@Validated Producto producto, BindingResult result,
-				Model model, @RequestParam("file") MultipartFile foto, 
+				Model model, @RequestParam("file") MultipartFile foto, @RequestParam("file2") MultipartFile foto2,
+				@RequestParam("file3") MultipartFile foto3,
 				RedirectAttributes flash, SessionStatus status) {
 			
 			if(result.hasErrors()) {
@@ -102,6 +104,37 @@ public class ProductoController {
 				}
 			}
 			
+			if(!foto2.isEmpty()) {
+				 Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
+				 String rootPath = directorioRecursos.toFile().getAbsolutePath();
+				 try {
+					byte[] bytes = foto2.getBytes();
+					Path rutaCompleta = Paths.get(rootPath + "//" + foto2.getOriginalFilename());
+					Files.write(rutaCompleta, bytes);
+					flash.addFlashAttribute("info", "Has subido correctamente la imagen2 '" + foto.getOriginalFilename()+"'");
+					
+					producto.setFoto2(foto2.getOriginalFilename());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			if(!foto3.isEmpty()) {
+				 Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
+				 String rootPath = directorioRecursos.toFile().getAbsolutePath();
+				 try {
+					byte[] bytes = foto3.getBytes();
+					Path rutaCompleta = Paths.get(rootPath + "//" + foto3.getOriginalFilename());
+					Files.write(rutaCompleta, bytes);
+					flash.addFlashAttribute("info", "Has subido correctamente la imagen3 '" + foto.getOriginalFilename()+"'");
+					
+					producto.setFoto3(foto3.getOriginalFilename());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
 			productoService.crear(producto);
 			status.setComplete();
@@ -213,13 +246,36 @@ public class ProductoController {
 
 	
 	@RequestMapping(value="/detalleproducto/{id}", method= RequestMethod.GET)
-	public String detalleProducto(@PathVariable(value="id") Long id, Model model) {
+	public String detalleProducto(@PathVariable(value="id") Long id,Model model) {
+		Pedido pedido= new Pedido();
 		
-		
-		model.addAttribute("cantidadCarrito", 0);
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("producto", productoService.buscar(id));
+		model.addAttribute("numfoto", 1);
 		model.addAttribute("titulo", "CATALOGO");
 		model.addAttribute("ingresar", "  Ingresar");
 		
+		
+		
+		return "/producto/detalleProducto";
+	}
+	
+	@RequestMapping(value="/detalleproducto/{id}/{urlfoto}", method= RequestMethod.GET)
+	public String detalleProducto(@PathVariable(value="id") Long id, @PathVariable(value="urlfoto") String urlfoto,Model model) {
+		Producto producto= productoService.buscar(id);
+		
+		if(producto.getFoto().equals(urlfoto)) {
+			model.addAttribute("numfoto", 1);
+		}else if(producto.getFoto2().equals(urlfoto)) {
+			model.addAttribute("numfoto", 2);
+		}else if(producto.getFoto3().equals(urlfoto)) {
+			model.addAttribute("numfoto", 3);
+		}
+		
+		Pedido pedido= new Pedido();
+		
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("producto", productoService.buscar(id));
 		
 		
 		return "/producto/detalleProducto";

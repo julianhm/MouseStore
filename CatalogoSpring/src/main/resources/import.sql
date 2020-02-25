@@ -14,3 +14,7 @@ INSERT INTO productos (nombre,descripcion,precio_pesos,peso, largo,ancho,profund
 INSERT INTO productos (nombre,descripcion,precio_pesos,peso, largo,ancho,profundo,foto,foto2,foto3) VALUES ('Parlantes','excelentes parlantes',24.78,74,14.89,78,45,'foto1.png','1-7 (1).png','diademas-bluetooth-wireless-sy-bt1608-D_NQ_NP_988339-MCO27228388045_042018-F.jpg');
 INSERT INTO productos (nombre,descripcion,precio_pesos,peso, largo,ancho,profundo,foto,foto2,foto3) VALUES ('Parlantes','excelentes parlantes',24.78,74,14.89,78,45,'rBVaVFw0a5aAYCvXAAKH1zr7tWU056.jpg','foto1.png','diademas-bluetooth-wireless-sy-bt1608-D_NQ_NP_988339-MCO27228388045_042018-F.jpg');
 
+
+INSERT INTO categorias (nombre,descripcion,foto) VALUES ('mi categoria 1 ','los mejores ','EVIDENCIA_1_JULIAN_HERRERA.jpg');
+INSERT INTO categorias (nombre,descripcion,foto) VALUES ('mi categoria 2 ','excelentes ','foto1.png');
+INSERT INTO categorias (nombre,descripcion,foto) VALUES ('mi categoria 3 ','nuevos','rBVaVFw0a5aAYCvXAAKH1zr7tWU056.jpg');

@@ -105,6 +105,8 @@ public class Categoria implements Serializable {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

@@ -3,6 +3,7 @@ package com.julianherrera.catalogo.web.app.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -44,10 +50,15 @@ public class CategoriaController {
 	@GetMapping(value = "/form")
 	public String buscarCategorias(Model model) {
 		
-		Categoria categoria = new Categoria();
 		
+		String id="";
+		String nombre="";
+		String descripcion="";
 		model.addAttribute("titulo","Agregar Categorias");
-		model.addAttribute("categoria",categoria);
+		
+		model.addAttribute("id",id);
+		model.addAttribute("nombre",nombre);
+		model.addAttribute("descripcion",descripcion);
 		
 		model.addAttribute("todasCategorias",categoriaService.bucarCategoria());
 	
@@ -56,19 +67,28 @@ public class CategoriaController {
 		
 	}
 	
-	@RequestMapping(value="/form", method= RequestMethod.POST)
-	public String crearCategoria(@Valid Categoria categoria, BindingResult result,Model model, RedirectAttributes flash, SessionStatus status) {
+	
+	@RequestMapping(value="/crear", method= RequestMethod.GET)
+	public String crearCategoria(@RequestParam(value = "id",required = true,defaultValue = "0") Long id,
+			@RequestParam(value = "nombre",required = true, defaultValue = "untitle") String nombre,
+            @RequestParam(value="descripcion",required = true,defaultValue = "vacio") String descripcion, 
+            Model model, RedirectAttributes flash, SessionStatus status)   {
 		
-		if(result.hasErrors()) {
-			model.addAttribute("titulo","Agregar Categorias");
-			
-			return "categoria/gestionCategoria";
+		
+		
+		
+		Categoria categoria = new Categoria();
+		categoria.setNombre(nombre);
+		categoria.setDescripcion(descripcion);
+		
+		if(id!=0) {
+			categoria.setCategoriaPadre(categoriaService.buscar(id));
 		}
 		
 		categoriaService.crear(categoria);
 		status.setComplete();
 		
-		flash.addFlashAttribute("success", "categoria creado con exito");
+		flash.addFlashAttribute("success", "categoria creada con exito");
 		
 		return "redirect:/categoria/form";
 

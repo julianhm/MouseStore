@@ -17,40 +17,32 @@
 
 		<div align="center">
 			<h1 th:text="${titulo}"></h1>
-			<div th:object="${categoria}" th:remove="tag">
-				<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-					<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
-				</ul>
-			</div>
-
-			<form style="position: center" th:action="@{/categoria/form}"
-				th:object="${categoria}" method="post">
+		
+<form th:action="@{/categoria/crear}">
+			
 				<table>
 
 
 					<tr>
 						<td>(*) Nombre Categoria :</td>
-						<td><input type="text" th:field="*{nombre}"
-							class="form-control" th:errorclass="'form-control alert-danger'" /></td>
-						<td><small class="form-text text-danger"
-							th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">
-						</small></td>
+						<td><input type="text" name="nombre"
+							class="form-control"  /></td>
+						
 					</tr>
 					<tr>
 						<td>Descripcion :</td>
-						<td><textarea name="descripcion" th:field="*{descripcion}"
-								class="form-control"
+						<td><textarea name="descripcion" 
+								class="form-control" id="descripcion"
 								placeholder="Escribe una breve descripcion!"></textarea></td>
 
 					</tr>
 					<tr>
 						<td>Categoria Padre :</td>
-						<td><select name="combo" th:field="*{categoriaPadre}"
-							disabled="disabled">
+						<td><select name="id" >
 								<!-- Opciones de la lista -->
-								<option value=null selected>Sin Categoria</option>
+								<option value=0 selected>Sin Categoria</option>
 								<option th:each="lasCategorias:${todasCategorias}"
-									value="${lasCategorias.idCategoria}" th:text="${lasCategorias.nombre}"></option>
+									th:value="${lasCategorias.idCategoria}"  th:text="${lasCategorias.nombre}"></option>
 
 						</select></td>
 
@@ -63,8 +55,10 @@
 
 					<tr>
 						<td></td>
-						<td align="center"><input type="submit"
-							value="Crear Categoria" /></td>
+						<td align="center">
+						
+						<input class="btn btn-primary btn-xs"
+							value="Crear Categoria" type="submit"/> </td>
 					</tr>
 
 					<tr>
@@ -74,8 +68,7 @@
 
 				</table>
 
-				<input type="hidden" th:field="*{idCategoria}" />
-			</form>
+				</form>
 
 
 

@@ -75,22 +75,6 @@ public class ClienteController {
 
 
 	
-	
-	//Metodo que recibe de la vista el usuario y la clave y se Busca en la base de datos
-		@RequestMapping(value = "/login", method= RequestMethod.POST)
-		public String buscarClienteCorreo(Cliente cliente, Model model) {
-			
-			
-			Cliente miCliente= clienteService.buscarPorCorreo(cliente.getCorreo())	;
-			
-			
-				return "redirect:/index";
-			
-				
-			
-			
-		}
-		
 		
 		
 		/**

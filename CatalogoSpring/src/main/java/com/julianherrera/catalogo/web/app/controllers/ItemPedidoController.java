@@ -82,7 +82,7 @@ public class ItemPedidoController {
 			clienteService.crear(cliente);
 		}
 		
-		flash.addAttribute("info", "Su pedido se realizo con exito");
+		flash.addFlashAttribute("info", "Su pedido se realizo con exito");
 	
 				
 		return "redirect:/producto/store";

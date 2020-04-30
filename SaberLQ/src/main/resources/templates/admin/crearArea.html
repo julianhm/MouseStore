@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<div class="page-wrapper chiller-theme toggled">
+		<a id="show-sidebar" class="btn btn-sm btn-dark" href="#"> <i
+			class="fas fa-bars"></i>
+		</a>
+
+		<header th:replace="layout/layout :: header"></header>
+		<main class="page-content">
+		
+			<div class="container">
+		<div  class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+		<div  class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+		<div  class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+		<div  class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+		</div>
+			<div class="container-fluid">
+
+				<div class="container">
+					<h1 th:text="${titulo}"
+						class="text-primary border border-success border-top-0 border-left-0 border-right-0"></h1>
+					<div th:object="${area}" th:remove="tag">
+						<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+							<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+						</ul>
+					</div>
+				</div>
+				<form th:action="@{/crearArea}" th:object="${area}" method="post"
+					enctype="multipart/form-data">
+
+					<table>
+						
+						<tr>
+							<div>
+								<td><label for="nombre">Nombre :</label></td>
+								<td>
+									<div>
+										<input type="text" id="nombre" th:field="*{nombre}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'"
+											style="text-transform: uppercase;"
+											onkeyup="javascript:this.value=this.value.toUpperCase();">
+										<small class="form-text text-danger"
+											th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+									</div>
+								</td>
+							</div>
+
+						</tr>
+
+
+						
+						<tr>
+							<div>
+								<td>
+									<div>
+										<input type="submit" value="Guardar">
+
+									</div>
+								</td>
+							</div>
+						</tr>
+
+
+					</table>
+
+				</form>
+				
+				<div class="container" id="mitabla">
+		<h3 class="text-primary border border-success border-top-0 border-left-0 border-right-0" th:text="${titulotabla}"></h3>
+		<table class="table table-striped" >
+			<thead>
+				<tr>
+					<th>Identificador</th>
+					<th>Nombre del Área</th>
+					
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr th:each="miarea:${areas}">
+					<td th:text="${miarea.id}"></td>
+					<td th:text="${miarea.nombre}"></td>
+					
+					<td> <a class="btn btn-danger btn-xs" th:href="@{/eliminarArea/} + ${miarea.id}" 
+					th:text= "'Eliminar'" 
+					onclick="return confirm('Estas seguro que deseas eliminar esta área??');"></a></td>
+					
+					
+				</tr>
+
+			</tbody>
+
+		</table>
+		<nav th:replace="layout/paginator-nav :: paginator" ></nav>
+	</div>
+				
+			</div>
+
+		</main>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+</head>
+<body>
+	<form th:action="@{/login}" th:object="${login}" method="post">
+		<div>
+			<label for="usuario">Usuario :</label>
+			<div>
+				<input type="text"  id="usuario" th:field="*{usuario}">
+				<div th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}"></div>
+			</div>
+		</div>
+
+		<div>
+			<label for="clave">Clave :</label>
+			<div>
+				<input type="password"  id="clave" th:field="*{clave}">
+				<div th:if="${#fields.hasErrors('clave')}" th:errors="*{clave}"></div>
+			</div>
+		</div>
+
+		<div>
+
+			<div>
+				<input type="submit" value="Enviar">
+			</div>
+		</div>
+
+	</form>
+
+</body>
+</html>

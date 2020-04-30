@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<div class="page-wrapper chiller-theme toggled">
+		<a id="show-sidebar" class="btn btn-sm btn-dark" href="#"> <i
+			class="fas fa-bars"></i>
+		</a>
+
+		<header th:replace="layout/layout :: header"></header>
+		<main class="page-content">
+			<div class="container-fluid">
+
+				<div class="container">
+					<h1 th:text="${titulo}"
+						class="text-primary border border-success border-top-0 border-left-0 border-right-0"></h1>
+					<div th:object="${docente}" th:remove="tag">
+						<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+							<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+						</ul>
+					</div>
+				</div>
+				<form th:action="@{/save}" th:object="${docente}" method="post">
+
+					<table>
+						<tr>
+							<div>
+								<td><label for="id">Documento de Identidad :</label></td>
+								<td><div>
+										<input type="number" id="id" th:field="*{id}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'" 
+											 readonly> 
+											
+											
+											<small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('id')}"
+											th:errors="*{id}"></small>
+									</div></td>
+							</div>
+
+						</tr>
+
+						<tr>
+							<div>
+								<td><label for="nombre">Nombre :</label></td>
+								<td>
+									<div>
+										<input type="text" id="nombre" th:field="*{nombre}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+									</div>
+								</td>
+							</div>
+
+						</tr>
+
+
+						<tr>
+							<div>
+								<td><label for="apellido">Apellido :</label></td>
+								<td><div>
+										<input type="text" id="apellido" th:field="*{apellido}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('apellido')}"
+											th:errors="*{apellido}"></small>
+									</div></td>
+							</div>
+
+						</tr>
+
+
+						<tr>
+							<div>
+								<td><label for="email">Correo Electrónico :</label></td>
+								<td><div>
+										<input type="text" id="email" th:field="*{email}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+									</div></td>
+							</div>
+
+						</tr>
+
+
+						<tr>
+							<div>
+								<td><label for="telefonoCel">Celular :</label></td>
+								<td><div>
+										<input type="text" id="telefonCel" th:field="*{telefonoCel}"
+											class="form-control"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('telefonoCel')}"
+											th:errors="*{telefonoCel}"></small>
+									</div></td>
+							</div>
+
+						</tr>
+
+
+						<tr>
+							<div>
+								<td><label for="telefonoFijo">Telefono Fijo :</label></td>
+								<td><div>
+										<input type="text" id="telefonoFijo"
+											th:field="*{telefonoFijo}" class="form-control"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('telefonoFijo')}"
+											th:errors="*{telefonoFijo}"></small>
+									</div></td>
+							</div>
+
+						</tr>
+
+
+						<tr>
+							<div>
+								<td><label for="fechaNacimiento">Fecha de
+										Nacimiento :</label></td>
+								<td><div>
+										<input type="date" id="fechaNacimiento"
+											th:field="*{fechaNacimiento}" class="form-control"
+											th:errorclass="'form-control alert-danger'"> <small
+											class="form-text text-danger"
+											th:if="${#fields.hasErrors('fechaNacimiento')}"
+											th:errors="*{fechaNacimiento}"></small>
+									</div></td>
+							</div>
+
+
+						</tr>
+
+
+
+
+						<tr>
+							<div>
+								<td>
+									<div>
+										 <input type="submit"  value="Actualizar"> 
+										
+									</div>
+								</td>
+							</div>
+						</tr>
+
+
+					</table>
+					
+				</form>
+			</div>
+
+		</main>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

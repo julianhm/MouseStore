@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="layout/layout :: head">
+
+</head>
+
+<body>
+
+	<!-------------------BARRA LATERAL MENU --------------------------->
+	<div class="page-wrapper chiller-theme toggled">
+		<a id="show-sidebar" class="btn btn-sm btn-dark" href="#"> <i
+			class="fas fa-bars"></i>
+		</a>
+		<header th:replace="layout/layout :: header"></header>
+		
+		
+		<!-------------------Contenido de la Pagina  --------------------------->
+		
+		<main class="page-content">
+			
+			<div class="container">
+		<div  class="alert alert-success" th:if="${success != null}" th:text="${success}"></div>
+		<div  class="alert alert-danger" th:if="${error != null}" th:text="${error}"></div>
+		<div  class="alert alert-warning" th:if="${warning != null}" th:text="${warning}"></div>
+		<div  class="alert alert-info" th:if="${info != null}" th:text="${info}"></div>
+		</div>
+				
+		<div class="container" id="mitabla">
+		<h1 class="text-primary border border-success border-top-0 border-left-0 border-right-0" th:text="${titulo}"></h1>
+		<table class="table table-striped" >
+			<thead>
+				<tr>
+					<th>Documentos</th>
+					<th>Nombres</th>
+					<th>Apellidos</th>
+					<th>Email</th>
+					<th>Celular</th>
+					<th>Telefono</th>
+					<th>Fecha Nacimiento</th>
+					<th>Editar</th>
+					<th>Eliminar</th>
+				</tr>
+
+			</thead>
+			<tbody>
+				<tr th:each="docente:${docentes}">
+					<td th:text="${docente.id}"></td>
+					<td th:text="${docente.nombre}"></td>
+					<td th:text="${docente.apellido}"></td>
+					<td th:text="${docente.email}"></td>
+					<td th:text="${docente.telefonoCel}"></td>
+					<td th:text="${docente.telefonoFijo}"></td>
+					<td th:text="${#dates.format(docente.fechaNacimiento,'dd/MMM/yyyy')}"></td>
+					<td> <a class="btn btn-primary btn-xs" th:href="@{/save/} + ${docente.id}" th:text= "'Editar'"></a></td>
+					<td> <a class="btn btn-danger btn-xs" th:href="@{/eliminar/} + ${docente.id}" 
+					th:text= "'Eliminar'" 
+					onclick="return confirm('Estas seguro que deseas eliminar este docente??');"></a></td>
+				</tr>
+
+			</tbody>
+
+		</table>
+		<nav th:replace="layout/paginator-nav :: paginator" ></nav>
+	</div>
+				
+				
+			
+
+		</main>
+		
+	</div>
+	
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+
+</html>

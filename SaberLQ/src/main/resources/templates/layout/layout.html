@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:fragment="head">
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+	content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
+
+<title th:text="${tituloprin}"></title>
+
+<link href="/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
+	rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<!-------------------BARRA LATERAL MENU --------------------------->
+	<div class="page-wrapper chiller-theme toggled">
+		<a id="show-sidebar" class="btn btn-sm btn-dark" href="#"> <i
+			class="fas fa-bars"></i>
+		</a>
+		
+		
+<!------------------------------------------------------------------------------>
+<!-------------------------------header----------------------------------------->
+<!------------------------------------------------------------------------------>
+<!------------------------------------------------------------------------------>
+		<header th:fragment="header">
+		<nav id="sidebar" class="sidebar-wrapper">
+			<div class="sidebar-content">
+				<div class="sidebar-brand">
+					<a>Liceo Quindío</a>
+					
+				</div>
+				<!---------------------------INFORMACION USUARIO----------------------------  -->
+				<div class="sidebar-header">
+					<div class="user-pic">
+						<img class="img-thumbnail" src="/images/user.jpg"
+							alt="User picture">
+					</div>
+					<div class="user-info">
+						<span class="user-name">Julian <strong>Herrera</strong>
+						</span> <span class="user-role">Administrator</span>
+
+					</div>
+				</div>
+
+				<!-------------------Buscar --------------------------->
+
+				<div class="sidebar-search">
+					<div>
+						<div class="input-group">
+							<input type="text" class="form-control search-menu"
+								placeholder="Buscar....">
+							<div class="input-group-append">
+								<span class="input-group-text"> <i class="fa fa-search"
+									aria-hidden="true"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-------------------BARRA LATERAL MENU --------------------------->
+				<div class="sidebar-menu">
+				
+				<!-------------------Menu desplegable --------------------------->
+					<ul>
+						<li class="header-menu"><span>General</span></li>
+
+
+						<!-------------------ITEM 1 --------------------------->
+						<li class="sidebar-dropdown"><a data-toggle="collapse"
+							href="#collapseExample" role="button" aria-expanded="false"
+							aria-controls="collapseExample"> <i
+								class="fa fa-cog"></i><span>Gestionar Docentes</span>
+						</a>
+
+							<div class="collapse" id="collapseExample">
+								<div class="card card-body">
+									<ul>
+										<li><a th:href="@{/save}"> Crear Docente</a></li>
+										<li><a th:href="@{/listar}">Listar Docentes</a></li>
+										<li><a href="#">Asignar intensidad</a></li>
+									</ul>
+								</div>
+							</div></li>
+							
+							<!-------------------ITEM 2 --------------------------->
+						<li class="sidebar-dropdown"><a data-toggle="collapse"
+							href="#collapseExample2" role="button" aria-expanded="false"
+							aria-controls="collapseExample2"> <i
+								class="fa fa-cog"></i><span>Gestionar Areas</span>
+						</a>
+
+							<div class="collapse" id="collapseExample2">
+								<div class="card card-body">
+									<ul>
+										<li><a th:href="@{/crearArea}"> Crear Areas</a></li>
+										<li><a th:href="@{/crearAsignatura}">Crear Asignaturas</a></li>
+										<li><a href="#">Crear Grupos</a></li>
+									</ul>
+								</div>
+							</div></li>
+
+
+						<!-------------------Menu fijo --------------------------->
+						
+						<li class="header-menu"><span>Extra</span></li>
+						
+						<li><a href="#"> <i class="fa fa-book"></i> <span>Documentation</span>
+								<span class="badge badge-pill badge-primary">Beta</span>
+						</a></li>
+						
+						
+						
+					</ul>
+				</div>
+				
+				
+				
+			</div>
+			
+			
+			<!-------------------Menu Pie --------------------------->
+			
+			<div class="sidebar-footer">
+				 
+				<!--<a href="#"> <i class="fa fa-cog"> Configurar</i>
+				 <span 	class="badge-sonar"></span>  
+				</a> -->
+				<a href="#"> <i class="fa fa-power-off"> Salir</i>
+				</a>
+			</div>
+		</nav>
+		</header>
+	
+	
+	
+<!------------------------------------------------------------------------------>
+<!-------------------------------header----------------------------------------->
+<!------------------------------------------------------------------------------>
+<!------------------------------------------------------------------------------>
+	
+	
+	
+	
+		<!-------------------Contenido de la Pagina  --------------------------->
+		
+		<main class="page-content">
+			<div class="container-fluid">
+					
+				<div class="container"></div>
+
+				
+				
+				
+				
+				
+				
+				
+			
+				
+			</div>
+
+		</main>
+		
+	</div>
+	
+<footer th:fragment="footer">
+<!-------------------scripts --------------------------->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/tabla.min.js}"></script>
+		
+</footer>	
+</body>
+
+</html>
